@@ -52,3 +52,45 @@ function adminlte_preprocess_menu_local_task(array &$variables): void {
     $variables['link']['#options']['attributes']['class'][] = 'active';
   }
 }
+
+/**
+ * Implements hook_preprocess_HOOK() for menu--account.html.twig.
+ *
+ * Turns the account menu into an AdminLTE navbar user dropdown: exposes the
+ * current user's name and picture, and maps each link to a Bootstrap icon.
+ */
+function adminlte_preprocess_menu__account(array &$variables): void {
+  $account = \Drupal::currentUser();
+  $variables['user_is_authenticated'] = $account->isAuthenticated();
+  $variables['user_name'] = $account->getDisplayName();
+  $variables['user_picture'] = NULL;
+
+  if ($account->isAuthenticated()) {
+    // The dropdown shows the current user's name/avatar, so vary by user.
+    $variables['#cache']['contexts'][] = 'user';
+    $user = \Drupal\user\Entity\User::load($account->id());
+    if ($user && $user->hasField('user_picture') && !$user->get('user_picture')->isEmpty()) {
+      $file = $user->get('user_picture')->entity;
+      if ($file) {
+        $variables['user_picture'] = \Drupal::service('file_url_generator')->generateString($file->getFileUri());
+      }
+    }
+  }
+
+  $route_icons = [
+    'user.page' => 'bi-person',
+    'entity.user.canonical' => 'bi-person',
+    'entity.user.edit_form' => 'bi-gear',
+    'user.admin_account' => 'bi-people',
+    'user.logout' => 'bi-box-arrow-right',
+    'user.login' => 'bi-box-arrow-in-right',
+    'user.register' => 'bi-person-plus',
+  ];
+  foreach ($variables['items'] as &$item) {
+    $route = '';
+    if (!empty($item['url']) && $item['url'] instanceof \Drupal\Core\Url && $item['url']->isRouted()) {
+      $route = $item['url']->getRouteName();
+    }
+    $item['icon'] = $route_icons[$route] ?? 'bi-dot';
+  }
+}

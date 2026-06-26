@@ -28,15 +28,16 @@
       </ul>
 
       <ul class="navbar-nav ms-auto">
-        {% if page.navbar_right %}
-          {{ page.navbar_right }}
-        {% endif %}
         {# Light/dark mode toggle. Behaviour lives in adminlte-drupal.js. #}
         <li class="nav-item">
           <button type="button" class="nav-link btn btn-link border-0" data-adminlte-theme-toggle aria-label="{{ 'Toggle dark mode'|t }}">
             <i class="bi bi-moon-stars" aria-hidden="true"></i>
           </button>
         </li>
+        {# Account menu — rendered as an AdminLTE user dropdown. #}
+        {% if page.navbar_right %}
+          {{ page.navbar_right }}
+        {% endif %}
       </ul>
     </div>
   </nav>

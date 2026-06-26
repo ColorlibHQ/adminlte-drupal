@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 account menu — rendered as a navbar user dropdown.
+ *
+ * Emits navbar <li> items directly (no wrapping <ul>): the account block is
+ * placed inside the navbar's <ul class="navbar-nav">. Authenticated users get a
+ * user dropdown (avatar/name + account links); anonymous users get the links
+ * inline (e.g. "Log in").
+ *
+ * Variables added by adminlte_preprocess_menu__account():
+ * - user_is_authenticated: bool
+ * - user_name: current user's display name
+ * - user_picture: URL of the user picture, or null
+ * - items: each item also carries item.icon (a Bootstrap Icons class)
+ *
+ * @see adminlte_preprocess_menu__account()
+ */
+#}
+{% if user_is_authenticated %}
+  <li class="nav-item dropdown user-menu">
+    <a href="#" class="nav-link dropdown-toggle d-flex align-items-center" data-bs-toggle="dropdown" role="button" aria-expanded="false">
+      {% if user_picture %}
+        <img src="{{ user_picture }}" class="user-image rounded-circle shadow" width="28" height="28" alt="">
+      {% else %}
+        <i class="bi bi-person-circle fs-5" aria-hidden="true"></i>
+      {% endif %}
+      <span class="d-none d-md-inline ms-2">{{ user_name }}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end shadow">
+      <li class="px-3 py-2 text-center border-bottom">
+        {% if user_picture %}
+          <img src="{{ user_picture }}" class="rounded-circle shadow mb-2" width="56" height="56" alt="">
+        {% else %}
+          <i class="bi bi-person-circle d-block mb-1" style="font-size: 2.5rem;" aria-hidden="true"></i>
+        {% endif %}
+        <div class="fw-semibold">{{ user_name }}</div>
+      </li>
+      {% for item in items %}
+        <li>
+          <a class="dropdown-item{{ item.in_active_trail ? ' active' }}" href="{{ item.url }}">
+            <i class="bi {{ item.icon|default('bi-dot') }} me-2" aria-hidden="true"></i>{{ item.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+{% else %}
+  {% for item in items %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ item.url }}">
+        <i class="bi {{ item.icon|default('bi-box-arrow-in-right') }} me-1" aria-hidden="true"></i>{{ item.title }}
+      </a>
+    </li>
+  {% endfor %}
+{% endif %}

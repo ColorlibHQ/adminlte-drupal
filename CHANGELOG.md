@@ -24,6 +24,14 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Bridge CSS mapping Drupal's admin form/button/table markup onto Bootstrap, plus
   a toolbar-displacement offset.
 
+### Changed
+
+- The navbar account menu is now a proper AdminLTE **user dropdown** (avatar/icon
+  + username, with a header and icon-prefixed "My account" / "Log out" items)
+  instead of a bare bulleted list. Anonymous users see an inline "Log in" link.
+  New `menu--account.html.twig`, `block--adminlte-account-menu.html.twig`, and
+  `adminlte_preprocess_menu__account()`; the colour-mode toggle moves left of it.
+
 ### Verified
 
 - Tested on a clean Drupal 11.3.13 install (standard profile, PHP 8.5): all core
