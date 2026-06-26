@@ -9,17 +9,15 @@
 
 /* -------------------------------------------------------------------------- *
  * Drupal toolbar coexistence
- * The administration toolbar is position:fixed at the top and exposes its
- * height through Drupal's displacement variable. Offset the AdminLTE shell so
- * the navbar and sidebar start below it.
+ * Drupal's admin toolbar is position:fixed and already pushes the page body
+ * down (it pads the body and exposes the height as --drupal-displace-offset-top).
+ * So we must NOT offset the AdminLTE header: it is position:relative, and a `top`
+ * there shifts the opaque navbar down over the content header, hiding the page
+ * title and breadcrumb. We only nudge the *sticky* sidebar's stick point so its
+ * top items don't slide under the toolbar while scrolling.
  * -------------------------------------------------------------------------- */
-.app-header {
-  top: var(--drupal-displace-offset-top, 0px);
-}
-
 .app-sidebar {
   top: var(--drupal-displace-offset-top, 0px);
-  height: calc(100% - var(--drupal-displace-offset-top, 0px));
 }
 
 /* -------------------------------------------------------------------------- *

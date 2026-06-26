@@ -8,9 +8,13 @@ Official **AdminLTE 4** admin theme for **Drupal** — Bootstrap 5.3, vanilla JS
 (no jQuery), light & dark colour modes. Self-contained: all assets are bundled
 locally, no CDN required. By [Colorlib](https://colorlib.com).
 
-> **Status: early scaffold.** This is a first, structurally complete version that
-> has **not yet been verified on a live Drupal install**. See
-> [Known limitations](#known-limitations) before using in production.
+Verified on **Drupal 11.3** (PHP 8.5): clean install, no errors/warnings in the
+log, all admin screens render with the AdminLTE shell in both colour modes.
+
+<p align="center">
+  <img alt="AdminLTE 4 for Drupal — admin, light theme" src="docs/screenshots/dashboard-light.png" width="49%">
+  <img alt="AdminLTE 4 for Drupal — admin, dark theme" src="docs/screenshots/dashboard-dark.png" width="49%">
+</p>
 
 ## Also available for your stack
 
@@ -89,16 +93,24 @@ At `/admin/appearance/settings/adminlte`:
 
 Everything is served from the theme — no external CDN calls.
 
+## Tested
+
+Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):
+
+- All core admin screens (dashboard, content, structure, modules, people, reports,
+  appearance, node add/edit) render with the AdminLTE shell and return HTTP 200.
+- No errors or warnings in the Drupal log after a full browse.
+- Page title, breadcrumb, sidebar menu, admin tabs, local actions, status messages
+  and the site-branding sidebar brand all render correctly.
+- Light and dark colour modes, the navbar mode toggle, and coexistence with the
+  Drupal admin **toolbar** (using `--drupal-displace-offset-top`) all work.
+
 ## Known limitations
 
-This is a **first scaffold**. Before relying on it:
-
-- It has not yet been installed/tested on a running Drupal site.
-- `screenshot.png` (294×219) still needs to be captured.
-- Admin **toolbar** / **Gin** coexistence uses Drupal's displacement variable but
-  needs real-world verification.
-- The bridge CSS covers common form/button/table markup; complex admin screens
-  (Views UI, Field UI, Media Library) may need extra styling.
+- The bridge CSS covers common form/button/table markup; very complex admin
+  screens (Views UI drag-and-drop, Field UI, Media Library) may benefit from
+  extra styling.
+- **Gin**-style toolbar coexistence is not specifically tuned (core toolbar is).
 
 Issues and patches welcome.
 

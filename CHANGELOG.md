@@ -24,10 +24,20 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Bridge CSS mapping Drupal's admin form/button/table markup onto Bootstrap, plus
   a toolbar-displacement offset.
 
-### Known limitations / TODO
+### Verified
 
-- Not yet verified on a live Drupal install — treat as a first scaffold.
-- `screenshot.png` still needs to be captured from a running site (294×219).
-- Admin toolbar / Gin coexistence offset is best-effort and needs testing.
-- Form/table coverage is intentionally minimal; deeper admin screens (Views UI,
+- Tested on a clean Drupal 11.3.13 install (standard profile, PHP 8.5): all core
+  admin screens render with the AdminLTE shell, both colour modes work, and the
+  Drupal log is free of errors and warnings after a full browse.
+- `screenshot.png` captured from the running site; screenshots added under
+  `docs/screenshots/`.
+- Fixed admin-toolbar coexistence: the AdminLTE header is `position: relative`, so
+  offsetting it with `top` shifted the navbar over the content header (hiding the
+  page title and breadcrumb). Drupal's toolbar already offsets the body, so the
+  header offset was removed; only the sticky sidebar's stick point is nudged.
+
+### Known limitations
+
+- Form/table coverage is intentionally pragmatic; deeper admin screens (Views UI,
   Field UI, media library) may need additional bridge styles.
+- Gin-style toolbar coexistence is not specifically tuned (core toolbar is).
