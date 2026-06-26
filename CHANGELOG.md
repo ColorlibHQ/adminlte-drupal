@@ -26,8 +26,17 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- The sidebar now surfaces Drupal's **Administration menu** as a collapsible
+  AdminLTE treeview (Content, Structure, Appearance, Extend, Configuration,
+  People, Reports, Help) with per-section icons, shipped as a default block
+  placement (`adminlte_admin`). The active section is highlighted and
+  auto-expanded — resolved client-side by longest matching path, which is robust
+  across menus. The "Main navigation" menu still renders below it. New
+  `menu--admin.html.twig` + `adminlte_preprocess_menu__admin()` (which also
+  unwraps the redundant "Administration" root), and an `adminlteSidebarActive`
+  JS behavior.
 - The navbar account menu is now a proper AdminLTE **user dropdown** (avatar/icon
-  + username, with a header and icon-prefixed "My account" / "Log out" items)
+  with username, plus a header and icon-prefixed "My account" / "Log out" items)
   instead of a bare bulleted list. Anonymous users see an inline "Log in" link.
   New `menu--account.html.twig`, `block--adminlte-account-menu.html.twig`, and
   `adminlte_preprocess_menu__account()`; the colour-mode toggle moves left of it.

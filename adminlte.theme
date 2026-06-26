@@ -54,6 +54,45 @@ function adminlte_preprocess_menu_local_task(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for menu--admin.html.twig.
+ *
+ * Gives the top-level Administration sections recognisable Bootstrap icons.
+ */
+function adminlte_preprocess_menu__admin(array &$variables): void {
+  // The Administration menu's root is a single "Administration" item; promote
+  // its children (Content, Structure, …) to the top level of the sidebar so the
+  // sections appear directly instead of nested under one parent.
+  if (count($variables['items']) === 1) {
+    $root = reset($variables['items']);
+    if (!empty($root['url']) && $root['url'] instanceof \Drupal\Core\Url
+      && $root['url']->isRouted() && $root['url']->getRouteName() === 'system.admin') {
+      $variables['items'] = $root['below'] ?? [];
+    }
+  }
+
+  $route_icons = [
+    'system.admin_content' => 'bi-file-earmark-text',
+    'system.admin_structure' => 'bi-diagram-3',
+    'system.themes_page' => 'bi-palette',
+    'system.modules_list' => 'bi-puzzle',
+    'system.admin_config' => 'bi-gear',
+    'entity.user.collection' => 'bi-people',
+    'system.admin_reports' => 'bi-graph-up',
+    'help.main' => 'bi-question-circle',
+    'system.admin' => 'bi-speedometer2',
+  ];
+  foreach ($variables['items'] as &$item) {
+    $route = '';
+    if (!empty($item['url']) && $item['url'] instanceof \Drupal\Core\Url && $item['url']->isRouted()) {
+      $route = $item['url']->getRouteName();
+    }
+    if (isset($route_icons[$route])) {
+      $item['icon'] = $route_icons[$route];
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for menu--account.html.twig.
  *
  * Turns the account menu into an AdminLTE navbar user dropdown: exposes the

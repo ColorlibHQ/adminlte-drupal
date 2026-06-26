@@ -50,4 +50,58 @@
       );
     },
   };
+
+  /**
+   * Marks the current page's sidebar link active and opens its section.
+   *
+   * The link is resolved client-side by longest matching path. This is robust
+   * across menus (the Administration menu's server-side active trail is not
+   * always populated for the active block) and gives AdminLTE's own `active` /
+   * `menu-open` classes so the treeview reflects where you are.
+   */
+  Drupal.behaviors.adminlteSidebarActive = {
+    attach(context) {
+      const current = window.location.pathname.replace(/\/+$/, '') || '/';
+      once('adminlte-sidebar-active', '.app-sidebar .sidebar-menu', context).forEach(
+        (menu) => {
+          let best = null;
+          let bestLen = -1;
+          menu.querySelectorAll('a.nav-link[href]').forEach((link) => {
+            const href = link.getAttribute('href');
+            if (!href || href === '#') {
+              return;
+            }
+            let path;
+            try {
+              path =
+                new URL(href, window.location.origin).pathname.replace(/\/+$/, '') ||
+                '/';
+            } catch {
+              return;
+            }
+            const matches =
+              current === path || (path !== '/' && current.startsWith(`${path}/`));
+            if (matches && path.length > bestLen) {
+              best = link;
+              bestLen = path.length;
+            }
+          });
+
+          if (!best) {
+            return;
+          }
+          best.classList.add('active');
+
+          // Open every ancestor treeview section so the active item is visible.
+          let item = best.closest('.nav-item');
+          while (item && menu.contains(item)) {
+            if (item.querySelector(':scope > .nav-treeview')) {
+              item.classList.add('menu-open');
+            }
+            item = item.parentElement ? item.parentElement.closest('.nav-item') : null;
+          }
+        },
+      );
+    },
+  };
 })(Drupal, once);

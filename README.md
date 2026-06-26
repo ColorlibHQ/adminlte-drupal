@@ -100,8 +100,10 @@ Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):
 - All core admin screens (dashboard, content, structure, modules, people, reports,
   appearance, node add/edit) render with the AdminLTE shell and return HTTP 200.
 - No errors or warnings in the Drupal log after a full browse.
-- Page title, breadcrumb, sidebar menu, admin tabs, local actions, status messages
-  and the site-branding sidebar brand all render correctly.
+- The **sidebar** shows the Administration menu as a collapsible treeview with
+  per-section icons; the active section is highlighted and auto-expanded.
+- Page title, breadcrumb, admin tabs, local actions, status messages, the
+  navbar user dropdown and the site-branding sidebar brand all render correctly.
 - Light and dark colour modes, the navbar mode toggle, and coexistence with the
   Drupal admin **toolbar** (using `--drupal-displace-offset-top`) all work.
 
