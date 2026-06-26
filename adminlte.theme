@@ -1,0 +1,54 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the AdminLTE 4 theme.
+ */
+
+declare(strict_types=1);
+
+/**
+ * Returns the theme's layout settings with sane defaults.
+ *
+ * @return array
+ *   Keyed by: default_color_mode, sidebar_dark.
+ */
+function _adminlte_layout_settings(): array {
+  return [
+    'default_color_mode' => theme_get_setting('default_color_mode', 'adminlte') ?? 'auto',
+    'sidebar_dark' => (bool) (theme_get_setting('sidebar_dark', 'adminlte') ?? TRUE),
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function adminlte_preprocess_html(array &$variables): void {
+  $variables['default_color_mode'] = _adminlte_layout_settings()['default_color_mode'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function adminlte_preprocess_page(array &$variables): void {
+  $settings = _adminlte_layout_settings();
+  $variables['sidebar_dark'] = $settings['sidebar_dark'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for menu-local-task.html.twig.
+ *
+ * Adds Bootstrap nav classes so admin tabs render as AdminLTE nav-tabs.
+ */
+function adminlte_preprocess_menu_local_task(array &$variables): void {
+  $variables['attributes']['class'][] = 'nav-item';
+
+  if (!isset($variables['link']['#options']['attributes']['class'])) {
+    $variables['link']['#options']['attributes']['class'] = [];
+  }
+  $variables['link']['#options']['attributes']['class'][] = 'nav-link';
+
+  if (!empty($variables['is_active'])) {
+    $variables['link']['#options']['attributes']['class'][] = 'active';
+  }
+}

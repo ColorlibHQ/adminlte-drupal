@@ -1,0 +1,33 @@
+AdminLTE 4 for Drupal
+=====================
+
+Copyright (c) Colorlib.
+
+This Drupal theme is licensed under the GNU General Public License, version 2
+or (at your option) any later version (GPL-2.0-or-later), in line with the
+licensing requirements for projects distributed on Drupal.org.
+
+You should have received a copy of the GNU General Public License along with
+this program; if not, see <https://www.gnu.org/licenses/gpl-2.0.html>.
+
+When this project is packaged on Drupal.org, the full GPL LICENSE.txt is added
+to the release archive automatically.
+
+--------------------------------------------------------------------------------
+Bundled third-party assets
+--------------------------------------------------------------------------------
+
+This theme bundles the following components. Their original (GPL-compatible)
+licenses continue to apply to those files:
+
+* AdminLTE 4 (css/adminlte.css, css/adminlte.rtl.css, js/adminlte.js)
+  MIT License — Copyright (c) Colorlib — https://github.com/ColorlibHQ/AdminLTE
+
+* Bootstrap 5.3 (bundled inside adminlte.css; js/vendor/bootstrap.bundle.min.js)
+  MIT License — Copyright (c) The Bootstrap Authors — https://getbootstrap.com
+
+* Bootstrap Icons 1.13 (css/vendor/bootstrap-icons.min.css and fonts)
+  MIT License — Copyright (c) The Bootstrap Authors — https://icons.getbootstrap.com
+
+The MIT License is compatible with the GPL; the combined work is distributed
+under GPL-2.0-or-later as noted above.

@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 implementation of a breadcrumb trail.
+ *
+ * Rendered as a Bootstrap breadcrumb aligned to the right of the AdminLTE
+ * content header.
+ *
+ * Available variables:
+ * - breadcrumb: A list of breadcrumb items, each with: text, url (optional).
+ *
+ * @see template_preprocess_breadcrumb()
+ */
+#}
+{% if breadcrumb %}
+  <nav role="navigation" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <ol class="breadcrumb float-sm-end mb-0">
+      {% for item in breadcrumb %}
+        <li class="breadcrumb-item{{ loop.last ? ' active' }}"{% if loop.last %} aria-current="page"{% endif %}>
+          {% if item.url and not loop.last %}
+            <a href="{{ item.url }}">{{ item.text }}</a>
+          {% else %}
+            {{ item.text }}
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

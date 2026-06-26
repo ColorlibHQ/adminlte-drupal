@@ -1,0 +1,17 @@
+global-styling:
+  version: 4.0.2
+  css:
+    # Bootstrap 5.3 is bundled inside adminlte.css, so no separate Bootstrap CSS.
+    theme:
+      css/vendor/bootstrap-icons.min.css: { minified: true }
+      css/adminlte.css: { minified: false }
+      css/adminlte-drupal.css: {}
+  js:
+    # Order matters: Bootstrap (with Popper) must load before AdminLTE.
+    js/vendor/bootstrap.bundle.min.js: { minified: true }
+    js/adminlte.js: {}
+    js/adminlte-drupal.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/once

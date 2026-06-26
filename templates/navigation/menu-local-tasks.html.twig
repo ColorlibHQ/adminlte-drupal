@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 implementation of primary/secondary local tasks (admin tabs).
+ *
+ * Rendered as Bootstrap nav-tabs / nav-pills so the Drupal "Tabs" block fits
+ * the AdminLTE content area.
+ *
+ * @see template_preprocess_menu_local_tasks()
+ */
+#}
+{% if primary %}
+  <nav class="mb-3" role="navigation" aria-labelledby="primary-tabs-title">
+    <h2 id="primary-tabs-title" class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
+    <ul class="nav nav-tabs">{{ primary }}</ul>
+  </nav>
+{% endif %}
+{% if secondary %}
+  <nav class="mb-3" role="navigation" aria-labelledby="secondary-tabs-title">
+    <h2 id="secondary-tabs-title" class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
+    <ul class="nav nav-pills">{{ secondary }}</ul>
+  </nav>
+{% endif %}

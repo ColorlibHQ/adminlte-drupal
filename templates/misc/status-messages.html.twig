@@ -1,0 +1,46 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 implementation of status messages.
+ *
+ * Renders Drupal messages as dismissible Bootstrap 5 alerts.
+ *
+ * Available variables:
+ * - message_list: List of messages grouped by type (status, warning, error).
+ * - status_headings: List of headings per message type.
+ * - attributes: HTML attributes for the wrapping element.
+ *
+ * @see template_preprocess_status_messages()
+ */
+#}
+{%
+  set type_map = {
+    'status': { 'class': 'alert-success', 'icon': 'bi-check-circle-fill' },
+    'warning': { 'class': 'alert-warning', 'icon': 'bi-exclamation-triangle-fill' },
+    'error': { 'class': 'alert-danger', 'icon': 'bi-x-octagon-fill' },
+  }
+%}
+<div data-drupal-messages{{ attributes }}>
+  {% for type, messages in message_list %}
+    {% set conf = type_map[type] ?? { 'class': 'alert-info', 'icon': 'bi-info-circle-fill' } %}
+    {% set alert_attributes = create_attribute({ 'class': ['alert', conf.class, 'alert-dismissible', 'fade', 'show', 'd-flex', 'align-items-start'] }) %}
+    <div role="{{ type == 'error' ? 'alert' : 'contentinfo' }}" aria-label="{{ status_headings[type] }}"{{ alert_attributes }}>
+      <i class="bi {{ conf.icon }} me-2 mt-1 flex-shrink-0" aria-hidden="true"></i>
+      <div class="flex-grow-1">
+        {% if status_headings[type] %}
+          <h2 class="visually-hidden">{{ status_headings[type] }}</h2>
+        {% endif %}
+        {% if messages|length > 1 %}
+          <ul class="mb-0 ps-3">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          {{ messages|first }}
+        {% endif %}
+      </div>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="{{ 'Close'|t }}"></button>
+    </div>
+  {% endfor %}
+</div>

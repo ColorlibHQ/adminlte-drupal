@@ -1,0 +1,26 @@
+name: 'AdminLTE 4'
+type: theme
+description: 'Official AdminLTE 4 admin theme for Drupal — Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. By Colorlib.'
+package: AdminLTE
+core_version_requirement: ^10.3 || ^11
+base theme: stable9
+screenshot: screenshot.png
+logo: logo.svg
+
+# Load the global AdminLTE styling/behaviour on every page.
+libraries:
+  - adminlte/global-styling
+
+regions:
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  navbar_left: 'Navbar (left)'
+  navbar_right: 'Navbar (right)'
+  sidebar_brand: 'Sidebar brand'
+  sidebar: 'Sidebar'
+  page_title: 'Content header: title'
+  breadcrumb: 'Content header: breadcrumb'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content: 'Content'
+  footer: 'Footer'

@@ -1,0 +1,21 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 implementation of the site branding block (sidebar brand).
+ *
+ * Outputs AdminLTE's `.brand-link` so the site logo + name appear at the top
+ * of the sidebar. Toggle logo/name via the block's settings.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+<a href="{{ path('<front>') }}" class="brand-link" {{ attributes }}>
+  {% if content.site_logo %}
+    <img src="{{ site_logo }}" alt="{{ 'Home'|t }}" class="brand-image opacity-75 shadow">
+  {% endif %}
+  {% if content.site_name %}
+    <span class="brand-text fw-light">{{ site_name }}</span>
+  {% endif %}
+</a>
+{# Render the slogan only if the block is configured to show it. #}
+{{ content.site_slogan }}

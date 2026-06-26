@@ -1,0 +1,94 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 implementation to display a single page.
+ *
+ * Builds the AdminLTE application shell: fixed header (navbar), collapsible
+ * sidebar, the main content area with an AdminLTE "content header", and the
+ * footer. Drupal regions are mapped onto AdminLTE's structural elements.
+ *
+ * @see template_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+<div class="app-wrapper">
+
+  {# begin::Header (navbar) #}
+  <nav class="app-header navbar navbar-expand bg-body">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button" aria-label="{{ 'Toggle navigation'|t }}">
+            <i class="bi bi-list" aria-hidden="true"></i>
+          </a>
+        </li>
+        {% if page.navbar_left %}
+          {{ page.navbar_left }}
+        {% endif %}
+      </ul>
+
+      <ul class="navbar-nav ms-auto">
+        {% if page.navbar_right %}
+          {{ page.navbar_right }}
+        {% endif %}
+        {# Light/dark mode toggle. Behaviour lives in adminlte-drupal.js. #}
+        <li class="nav-item">
+          <button type="button" class="nav-link btn btn-link border-0" data-adminlte-theme-toggle aria-label="{{ 'Toggle dark mode'|t }}">
+            <i class="bi bi-moon-stars" aria-hidden="true"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  {# end::Header #}
+
+  {# begin::Sidebar #}
+  <aside class="app-sidebar shadow{{ sidebar_dark ? ' bg-body-secondary' : ' bg-body' }}"{% if sidebar_dark %} data-bs-theme="dark"{% endif %}>
+    <div class="sidebar-brand">
+      {% if page.sidebar_brand %}
+        {{ page.sidebar_brand }}
+      {% endif %}
+    </div>
+    <div class="sidebar-wrapper">
+      {% if page.sidebar %}
+        {{ page.sidebar }}
+      {% endif %}
+    </div>
+  </aside>
+  {# end::Sidebar #}
+
+  {# begin::Main #}
+  <main class="app-main">
+    {% if page.page_title or page.breadcrumb %}
+      <div class="app-content-header">
+        <div class="container-fluid">
+          <div class="row align-items-center">
+            <div class="col-sm-6">
+              {{ page.page_title }}
+            </div>
+            <div class="col-sm-6">
+              {{ page.breadcrumb }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="app-content">
+      <div class="container-fluid">
+        {{ page.highlighted }}
+        {{ page.help }}
+        <a id="main-content" tabindex="-1"></a>
+        {{ page.content }}
+      </div>
+    </div>
+  </main>
+  {# end::Main #}
+
+  {% if page.footer %}
+    <footer class="app-footer">
+      {{ page.footer }}
+    </footer>
+  {% endif %}
+
+</div>

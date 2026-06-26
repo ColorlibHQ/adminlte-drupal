@@ -1,0 +1,67 @@
+{#
+/**
+ * @file
+ * AdminLTE 4 implementation to display the basic html structure.
+ *
+ * Adds the AdminLTE body classes and an inline theme-init script that sets
+ * `data-bs-theme` on <html> before the stylesheet loads, preventing a flash
+ * of the wrong colour mode (mirrors AdminLTE core, see ColorlibHQ/AdminLTE#6043).
+ *
+ * @see template_preprocess_html()
+ * @see adminlte_preprocess_html()
+ */
+#}
+{%
+  set body_classes = [
+    'layout-fixed',
+    'sidebar-expand-lg',
+    'bg-body-tertiary',
+    logged_in ? 'user-logged-in',
+    not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
+  ]
+%}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    {# Resolve and apply the colour mode early to avoid a theme flash. #}
+    <script>
+      (() => {
+        'use strict';
+        const STORAGE_KEY = 'lte-theme';
+        const fallback = {{ default_color_mode|default('auto')|json_encode|raw }};
+        let stored = null;
+        try { stored = localStorage.getItem(STORAGE_KEY); } catch { /* private mode */ }
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        let resolved = 'light';
+        if (stored === 'dark' || stored === 'light') {
+          resolved = stored;
+        } else if (stored === null && fallback === 'dark') {
+          resolved = 'dark';
+        } else if ((stored === null ? fallback : stored) === 'auto' || stored === 'auto') {
+          resolved = prefersDark ? 'dark' : 'light';
+        } else if (fallback === 'auto' && prefersDark) {
+          resolved = 'dark';
+        }
+        document.documentElement.setAttribute('data-bs-theme', resolved);
+        document.documentElement.style.colorScheme = resolved;
+      })();
+    </script>
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+  </head>
+  <body{{ attributes.addClass(body_classes) }}>
+    {#
+      Keyboard navigation/accessibility: skip to the main content. AdminLTE/Bootstrap
+      provide the .visually-hidden-focusable styling.
+    #}
+    <a href="#main-content" class="visually-hidden-focusable skip-link badge text-bg-primary position-absolute top-0 start-0 m-2" style="z-index:2000">
+      {{ 'Skip to main content'|t }}
+    </a>
+    {{ page_top }}
+    {{ page }}
+    {{ page_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+  </body>
+</html>
