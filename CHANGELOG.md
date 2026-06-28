@@ -26,6 +26,15 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- Bridged the Drupal admin **components** that Claro styles (this theme is based
+  on stable9, so they were previously unstyled): **dropbuttons** (operations
+  menus) now render as a button with a floating, opaque dropdown — secondary
+  actions are relocated into a positioned menu by `adminlte-drupal.js` so they no
+  longer overflow onto neighbouring table rows; **tabledrag** handles show a grip
+  icon with a move cursor; **vertical tabs** render as a proper menu + pane;
+  **pagers** become Bootstrap pagination; jQuery-UI **modal dialogs** get a solid
+  surface, styled title bar, × close button and button pane (light + dark);
+  plus `.form-actions`, `.action-links`, inline containers and the AJAX throbber.
 - The sidebar now surfaces Drupal's **Administration menu** as a collapsible
   AdminLTE treeview (Content, Structure, Appearance, Extend, Configuration,
   People, Reports, Help) with per-section icons, shipped as a default block

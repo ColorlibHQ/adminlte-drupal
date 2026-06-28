@@ -203,3 +203,478 @@ details > summary {
 .sidebar-brand .brand-link {
   text-decoration: none;
 }
+
+/* ========================================================================== *
+ * Drupal admin components
+ * Drupal core renders these widgets with markup that the Claro admin theme
+ * styles. This theme is based on stable9 (minimal), so we bridge them to a
+ * Bootstrap / AdminLTE look here.
+ * ========================================================================== */
+
+/* -------------------------------------------------------------------------- *
+ * Dropbutton (operations menus: Edit ▾ Duplicate / Disable / Delete)
+ * -------------------------------------------------------------------------- */
+.dropbutton-wrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+}
+
+.dropbutton-widget {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+
+ul.dropbutton {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.dropbutton li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Action links and the toggle render as Bootstrap-like buttons. */
+.dropbutton li > a,
+.dropbutton li > .button,
+.dropbutton-toggle > button {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 0.6rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--bs-body-color);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.dropbutton li > a:hover,
+.dropbutton li > .button:hover,
+.dropbutton-toggle > button:hover {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-emphasis-color);
+}
+
+/* Primary action + toggle joined into one group (collapsed state). */
+.dropbutton-action:first-child > a,
+.dropbutton-action:first-child > .button {
+  border-top-left-radius: var(--bs-border-radius);
+  border-bottom-left-radius: var(--bs-border-radius);
+}
+
+.dropbutton-multiple .dropbutton-action:first-child > a,
+.dropbutton-multiple .dropbutton-action:first-child > .button {
+  border-right: 0;
+}
+
+.dropbutton-toggle {
+  display: flex;
+}
+
+.dropbutton-toggle > button {
+  width: auto;
+  padding-inline: 0.45rem;
+  background-color: var(--bs-secondary-bg);
+  border-top-right-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
+}
+
+/* Single-action dropbutton: a normal rounded button. */
+.dropbutton-wrapper:not(.dropbutton-multiple) .dropbutton-action:first-child > a,
+.dropbutton-wrapper:not(.dropbutton-multiple) .dropbutton-action:first-child > .button {
+  border-radius: var(--bs-border-radius);
+}
+
+/* The toggle arrow. */
+.dropbutton-arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  vertical-align: middle;
+  border-top: 0.35em solid currentColor;
+  border-right: 0.3em solid transparent;
+  border-left: 0.3em solid transparent;
+}
+
+.dropbutton-multiple.open .dropbutton-toggle > button {
+  background-color: var(--bs-tertiary-bg);
+}
+
+/* Secondary actions live in a floating menu (relocated by adminlte-drupal.js)
+   so they overlay content like a Bootstrap dropdown instead of pushing or
+   colliding with neighbouring table rows. */
+ul.dropbutton-menu {
+  position: absolute;
+  z-index: 1000;
+  inset-inline-start: 0;
+  top: 100%;
+  display: none;
+  min-width: 100%;
+  margin: 2px 0 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  box-shadow: var(--bs-box-shadow);
+}
+
+.dropbutton-wrapper.open ul.dropbutton-menu {
+  display: block;
+}
+
+ul.dropbutton-menu .secondary-action {
+  display: block;
+}
+
+ul.dropbutton-menu .secondary-action > a {
+  display: block;
+  width: 100%;
+  padding: 0.35rem 1rem;
+  white-space: nowrap;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+}
+
+ul.dropbutton-menu .secondary-action > a:hover {
+  background-color: var(--bs-secondary-bg);
+}
+
+/* No-JS fallback: if the menu was never built, keep the actions visible. */
+.dropbutton-multiple .dropbutton .secondary-action {
+  display: inline-block;
+}
+
+/* -------------------------------------------------------------------------- *
+ * Tabledrag (drag-to-reorder handles + draggable rows)
+ * -------------------------------------------------------------------------- */
+a.tabledrag-handle {
+  display: inline-block;
+  height: 1.75rem;
+  padding: 0 0.4rem;
+  color: var(--bs-secondary-color);
+  text-decoration: none;
+  cursor: move;
+}
+
+a.tabledrag-handle .handle {
+  display: block;
+  width: 1rem;
+  height: 1.75rem;
+}
+
+a.tabledrag-handle .handle::before {
+  display: inline-block;
+  font-family: "bootstrap-icons" !important;
+  font-size: 1.1rem;
+  line-height: 1.75rem;
+  content: "\f3fe"; /* bi-grip-vertical */
+}
+
+a.tabledrag-handle:hover,
+a.tabledrag-handle.tabledrag-handle-hover {
+  color: var(--bs-primary);
+}
+
+tr.drag {
+  background-color: var(--bs-warning-bg-subtle);
+}
+
+tr.drag-previous {
+  background-color: var(--bs-info-bg-subtle);
+}
+
+.tabledrag-changed,
+abbr.tabledrag-changed {
+  color: var(--bs-warning-text-emphasis);
+}
+
+.indentation {
+  position: relative;
+  left: 0;
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.75rem;
+  vertical-align: top;
+}
+
+/* -------------------------------------------------------------------------- *
+ * Vertical tabs (built by core's vertical-tabs.js)
+ * -------------------------------------------------------------------------- */
+.vertical-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+}
+
+.vertical-tabs__menu {
+  flex: 0 0 15rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: var(--bs-secondary-bg);
+  border-right: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.vertical-tabs__menu-item {
+  margin: 0;
+  list-style: none;
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.vertical-tabs__menu-item:last-child {
+  border-bottom: 0;
+}
+
+.vertical-tabs__menu-item > a {
+  display: block;
+  padding: 0.6rem 1rem;
+  color: var(--bs-body-color);
+  text-decoration: none;
+}
+
+.vertical-tabs__menu-item > a:hover,
+.vertical-tabs__menu-item > a:focus {
+  background-color: var(--bs-body-bg);
+}
+
+.vertical-tabs__menu-item.is-selected > a {
+  background-color: var(--bs-body-bg);
+  box-shadow: inset 3px 0 0 var(--bs-primary);
+}
+
+.vertical-tabs__menu-item-title {
+  display: block;
+  font-weight: 600;
+}
+
+.vertical-tabs__menu-item-summary {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  color: var(--bs-secondary-color);
+}
+
+/* Panes: each is a <details>; only the selected one is shown by the JS. */
+.vertical-tabs > details,
+.vertical-tabs__pane {
+  flex: 1 1 60%;
+  min-width: 50%;
+  margin: 0;
+  padding: 0.5rem 1.25rem 1rem;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.vertical-tabs > details > summary {
+  display: none; /* the menu replaces the summaries */
+}
+
+/* -------------------------------------------------------------------------- *
+ * Pager → Bootstrap pagination
+ * -------------------------------------------------------------------------- */
+.pager__items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pager__item {
+  margin: 0;
+  list-style: none;
+}
+
+.pager__item > a,
+.pager__item > span {
+  position: relative;
+  display: block;
+  padding: 0.375rem 0.75rem;
+  margin-left: -1px;
+  color: var(--bs-link-color);
+  text-decoration: none;
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.pager__item > a:hover {
+  background-color: var(--bs-secondary-bg);
+}
+
+.pager__item.is-active > a,
+.pager__item.is-active > span {
+  z-index: 1;
+  color: #fff;
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.pager__item:first-child > a,
+.pager__item:first-child > span {
+  margin-left: 0;
+  border-top-left-radius: var(--bs-border-radius);
+  border-bottom-left-radius: var(--bs-border-radius);
+}
+
+.pager__item:last-child > a,
+.pager__item:last-child > span {
+  border-top-right-radius: var(--bs-border-radius);
+  border-bottom-right-radius: var(--bs-border-radius);
+}
+
+/* -------------------------------------------------------------------------- *
+ * Misc form helpers
+ * -------------------------------------------------------------------------- */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.form-actions .button {
+  margin: 0;
+}
+
+.container-inline > .form-item,
+.container-inline .form-item {
+  display: inline-block;
+  margin-right: 0.75rem;
+  vertical-align: middle;
+}
+
+input.form-checkbox,
+input.form-radio {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -2px;
+}
+
+/* The exposed-filter "Add content" / actions list shouldn't show bullets. */
+.action-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.action-links > li {
+  margin: 0;
+  list-style: none;
+}
+
+/* -------------------------------------------------------------------------- *
+ * AJAX throbber + modal dialog safety
+ * -------------------------------------------------------------------------- */
+.ajax-progress-throbber .throbber,
+.ajax-progress-fullscreen {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 0.3rem;
+  vertical-align: middle;
+  border: 2px solid var(--bs-secondary-color);
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: adminlte-spin 0.7s linear infinite;
+}
+
+@keyframes adminlte-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Core modal dialogs (jQuery UI) need a solid surface in both colour modes. */
+.ui-dialog {
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  box-shadow: var(--bs-box-shadow);
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  position: relative;
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  background-color: var(--bs-tertiary-bg);
+  border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.ui-dialog .ui-dialog-title {
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+}
+
+.ui-dialog .ui-dialog-content {
+  background-color: var(--bs-body-bg);
+  color: var(--bs-body-color);
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background-color: var(--bs-body-bg);
+  border-top: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+  position: absolute;
+  top: 0.55rem;
+  inset-inline-end: 0.75rem;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  font-size: 0;
+  line-height: 1;
+  color: var(--bs-secondary-color);
+  background: transparent;
+  border: 0;
+  border-radius: var(--bs-border-radius);
+  cursor: pointer;
+}
+
+.ui-dialog .ui-dialog-titlebar-close:hover {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-emphasis-color);
+}
+
+.ui-dialog .ui-dialog-titlebar-close::before {
+  font-size: 1.5rem;
+  line-height: 1.9rem;
+  content: "\00D7"; /* × */
+}
+
+.ui-dialog .ui-dialog-titlebar-close .ui-icon {
+  display: none;
+}

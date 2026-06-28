@@ -104,4 +104,34 @@
       );
     },
   };
+
+  /**
+   * Moves a multi-action dropbutton's secondary actions into a floating menu.
+   *
+   * Drupal's dropbutton keeps the secondary actions inline in the same list,
+   * which (without Claro's CSS) overflows onto neighbouring table rows when
+   * opened. Relocating them into a positioned menu lets it float above content
+   * like a Bootstrap dropdown. Drupal still toggles `.open` on the wrapper.
+   */
+  Drupal.behaviors.adminlteDropbutton = {
+    attach(context) {
+      // Core's dropbutton.js adds `.dropbutton-multiple` / `.secondary-action`
+      // during this same attach cycle. Defer to a microtask so it has run first.
+      Promise.resolve().then(() => {
+        once('adminlte-dropbutton', '.dropbutton-multiple', context).forEach(
+          (wrapper) => {
+            const widget = wrapper.querySelector('.dropbutton-widget');
+            const secondary = wrapper.querySelectorAll('.secondary-action');
+            if (!widget || !secondary.length) {
+              return;
+            }
+            const menu = document.createElement('ul');
+            menu.className = 'dropbutton-menu';
+            secondary.forEach((item) => menu.appendChild(item));
+            widget.appendChild(menu);
+          },
+        );
+      });
+    },
+  };
 })(Drupal, once);
