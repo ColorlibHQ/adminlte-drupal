@@ -95,8 +95,10 @@
           // Open every ancestor treeview section so the active item is visible.
           let item = best.closest('.nav-item');
           while (item && menu.contains(item)) {
-            if (item.querySelector(':scope > .nav-treeview')) {
+            const submenu = item.querySelector(':scope > .nav-treeview');
+            if (submenu) {
               item.classList.add('menu-open');
+              submenu.style.display = 'block';
               const toggle = item.querySelector(':scope > .nav-treeview-toggle');
               if (toggle) {
                 toggle.setAttribute('aria-expanded', 'true');
@@ -130,6 +132,12 @@
             return;
           }
           const isOpen = item.classList.toggle('menu-open');
+          // Drive display inline: AdminLTE's slideDown leaves an inline
+          // display:block on initially-open sections that a class alone can't undo.
+          const submenu = item.querySelector(':scope > .nav-treeview');
+          if (submenu) {
+            submenu.style.display = isOpen ? 'block' : 'none';
+          }
           button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
       });
