@@ -23,7 +23,7 @@ function adminlte_form_system_theme_settings_alter(array &$form, FormStateInterf
   $form['adminlte']['default_color_mode'] = [
     '#type' => 'select',
     '#title' => t('Default colour mode'),
-    '#description' => t('Applied on a visitor\'s first visit. Visitors can override it with the navbar toggle; their choice is remembered in the browser.'),
+    '#description' => t("Applied on a visitor's first visit. Visitors can override it with the navbar toggle; their choice is remembered in the browser."),
     '#options' => [
       'auto' => t('Auto (follow operating system)'),
       'light' => t('Light'),

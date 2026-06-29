@@ -39,6 +39,7 @@ no errors or warnings in the log.
   `config/optional`) so the theme renders immediately on enable.
 - Bridge CSS mapping Drupal's admin form/button/table markup onto Bootstrap, and a
   displacement offset so the shell coexists with the core admin toolbar.
+- Passes Drupal coding standards (PHPCS `Drupal` + `DrupalPractice`).
 
 ### Known limitations
 

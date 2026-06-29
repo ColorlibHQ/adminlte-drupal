@@ -7,6 +7,9 @@
 
 declare(strict_types=1);
 
+use Drupal\user\Entity\User;
+use Drupal\Core\Url;
+
 /**
  * Returns the theme's layout settings with sane defaults.
  *
@@ -64,7 +67,7 @@ function adminlte_preprocess_menu__admin(array &$variables): void {
   // sections appear directly instead of nested under one parent.
   if (count($variables['items']) === 1) {
     $root = reset($variables['items']);
-    if (!empty($root['url']) && $root['url'] instanceof \Drupal\Core\Url
+    if (!empty($root['url']) && $root['url'] instanceof Url
       && $root['url']->isRouted() && $root['url']->getRouteName() === 'system.admin') {
       $variables['items'] = $root['below'] ?? [];
     }
@@ -83,7 +86,7 @@ function adminlte_preprocess_menu__admin(array &$variables): void {
   ];
   foreach ($variables['items'] as &$item) {
     $route = '';
-    if (!empty($item['url']) && $item['url'] instanceof \Drupal\Core\Url && $item['url']->isRouted()) {
+    if (!empty($item['url']) && $item['url'] instanceof Url && $item['url']->isRouted()) {
       $route = $item['url']->getRouteName();
     }
     if (isset($route_icons[$route])) {
@@ -107,7 +110,7 @@ function adminlte_preprocess_menu__account(array &$variables): void {
   if ($account->isAuthenticated()) {
     // The dropdown shows the current user's name/avatar, so vary by user.
     $variables['#cache']['contexts'][] = 'user';
-    $user = \Drupal\user\Entity\User::load($account->id());
+    $user = User::load($account->id());
     if ($user && $user->hasField('user_picture') && !$user->get('user_picture')->isEmpty()) {
       $file = $user->get('user_picture')->entity;
       if ($file) {
@@ -127,7 +130,7 @@ function adminlte_preprocess_menu__account(array &$variables): void {
   ];
   foreach ($variables['items'] as &$item) {
     $route = '';
-    if (!empty($item['url']) && $item['url'] instanceof \Drupal\Core\Url && $item['url']->isRouted()) {
+    if (!empty($item['url']) && $item['url'] instanceof Url && $item['url']->isRouted()) {
       $route = $item['url']->getRouteName();
     }
     $item['icon'] = $route_icons[$route] ?? 'bi-dot';
