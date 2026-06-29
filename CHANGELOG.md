@@ -26,6 +26,13 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- Sidebar submenus now have **separate controls**: clicking a parent item's
+  label navigates to its section page, while clicking the **chevron** expands or
+  collapses the submenu in place. The chevron is a real `<button>` (with
+  `aria-expanded`) rendered beside the link; AdminLTE's link-hijacking treeview is
+  disabled on the sidebar, and expand/collapse plus active-trail auto-expand are
+  handled by `adminlte-drupal.js`. This gives both behaviours (navigate *and*
+  browse) instead of the click doing both at once.
 - The **Extend (modules)** page now shows each module's full description. Core
   keeps the description in a collapsed `<details>` clipped to one line
   (`white-space: nowrap`) and only unclips it when expanded via Claro's affordance,

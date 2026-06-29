@@ -22,7 +22,7 @@
   {% if items %}
     {% if menu_level == 0 %}
       <nav class="mt-2" aria-label="{{ 'Administration'|t }}">
-        <ul{{ attributes.addClass('nav', 'sidebar-menu', 'flex-column').setAttribute('data-lte-toggle', 'treeview').setAttribute('data-accordion', 'false').setAttribute('role', 'navigation') }}>
+        <ul{{ attributes.addClass('nav', 'sidebar-menu', 'flex-column').setAttribute('role', 'navigation') }}>
     {% else %}
       <ul class="nav nav-treeview">
     {% endif %}
@@ -43,14 +43,13 @@
       <li{{ item.attributes.addClass(li_classes) }}>
         <a href="{{ item.url }}" class="{{ link_classes|join(' ')|trim }}">
           <i class="nav-icon bi {{ item.icon|default(menu_level == 0 ? 'bi-record-circle' : 'bi-circle') }}" aria-hidden="true"></i>
-          <p>
-            {{ item.title }}
-            {% if item.below %}
-              <i class="nav-arrow bi bi-chevron-right" aria-hidden="true"></i>
-            {% endif %}
-          </p>
+          <p>{{ item.title }}</p>
         </a>
         {% if item.below %}
+          {# Separate toggle so the link navigates and the chevron expands. #}
+          <button type="button" class="nav-treeview-toggle" aria-expanded="{{ item.in_active_trail ? 'true' : 'false' }}" aria-label="{{ 'Toggle submenu'|t }}">
+            <i class="nav-arrow bi bi-chevron-right" aria-hidden="true"></i>
+          </button>
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
       </li>

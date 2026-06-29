@@ -97,11 +97,42 @@
           while (item && menu.contains(item)) {
             if (item.querySelector(':scope > .nav-treeview')) {
               item.classList.add('menu-open');
+              const toggle = item.querySelector(':scope > .nav-treeview-toggle');
+              if (toggle) {
+                toggle.setAttribute('aria-expanded', 'true');
+              }
             }
             item = item.parentElement ? item.parentElement.closest('.nav-item') : null;
           }
         },
       );
+    },
+  };
+
+  /**
+   * Sidebar submenu expand/collapse.
+   *
+   * The chevron is a dedicated button (sibling of the link), so clicking the
+   * link navigates to the section page while the chevron toggles the submenu in
+   * place. CSS shows `.menu-open > .nav-treeview`, so we just toggle the class.
+   */
+  Drupal.behaviors.adminlteTreeviewToggle = {
+    attach(context) {
+      once(
+        'adminlte-treeview-toggle',
+        '.app-sidebar .sidebar-menu .nav-treeview-toggle',
+        context,
+      ).forEach((button) => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          const item = button.closest('.nav-item');
+          if (!item) {
+            return;
+          }
+          const isOpen = item.classList.toggle('menu-open');
+          button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      });
     },
   };
 
