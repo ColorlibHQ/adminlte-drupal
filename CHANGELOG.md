@@ -26,6 +26,10 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- The **Extend (modules)** page now shows each module's full description. Core
+  keeps the description in a collapsed `<details>` clipped to one line
+  (`white-space: nowrap`) and only unclips it when expanded via Claro's affordance,
+  which this stable9-based theme lacked — so descriptions render in full now.
 - Bridged the Drupal admin **components** that Claro styles (this theme is based
   on stable9, so they were previously unstyled): **dropbuttons** (operations
   menus) now render as a button with a floating, opaque dropdown — secondary

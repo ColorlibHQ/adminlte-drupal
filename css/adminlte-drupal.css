@@ -588,6 +588,26 @@ input.form-radio {
 }
 
 /* -------------------------------------------------------------------------- *
+ * Modules (Extend) page: each module description sits in a collapsed <details>
+ * that core clips to a single line (white-space: nowrap; overflow: hidden) and
+ * only unclips when opened — but Claro's expand affordance isn't present here.
+ * Just show the full, wrapping description so nothing is cut off.
+ * -------------------------------------------------------------------------- */
+.system-modules td.description details,
+.system-modules td details,
+.system-modules details {
+  height: auto;
+  overflow: visible;
+  white-space: normal;
+}
+
+.system-modules details summary,
+.system-modules details summary .text,
+.system-modules .module-description {
+  white-space: normal;
+}
+
+/* -------------------------------------------------------------------------- *
  * AJAX throbber + modal dialog safety
  * -------------------------------------------------------------------------- */
 .ajax-progress-throbber .throbber,
