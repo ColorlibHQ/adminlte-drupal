@@ -6,75 +6,45 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [1.0.0-beta1] - 2026-06-29
+
+First public release. Official **AdminLTE 4** admin theme for **Drupal 10.3+ / 11**
+— Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes, fully self-contained
+(no CDN). Verified on a clean Drupal 11.3.13 install (standard profile, PHP 8.5):
+every core admin screen renders with the AdminLTE shell in both colour modes, with
+no errors or warnings in the log.
+
 ### Added
 
-- Initial AdminLTE 4 admin theme for Drupal 10.3+ / 11.
-- AdminLTE application shell (`html.html.twig`, `page.html.twig`) mapping Drupal
-  regions onto AdminLTE's navbar, sidebar, content header, content and footer.
+- AdminLTE 4 application shell (`html.html.twig`, `page.html.twig`) mapping Drupal
+  regions onto the navbar, sidebar, content header, content and footer.
 - Self-contained, locally bundled assets: `adminlte.css` (Bootstrap 5.3 included),
   `adminlte.js`, `bootstrap.bundle.min.js` and Bootstrap Icons — no CDN required.
-- Sidebar treeview menu via `menu--main.html.twig`.
-- Admin tabs styled as Bootstrap nav-tabs/pills (`menu-local-tasks`).
-- Status messages rendered as dismissible Bootstrap alerts.
-- Light / dark colour modes with a navbar toggle, OS-preference auto mode, and a
-  flash-free inline theme initialiser (mirrors AdminLTE core #6043).
-- Theme settings: default colour mode and dark sidebar.
-- Default block placement shipped in `config/install` (and an optional Help block
-  in `config/optional`) so the theme renders immediately on enable.
-- Bridge CSS mapping Drupal's admin form/button/table markup onto Bootstrap, plus
-  a toolbar-displacement offset.
-
-### Changed
-
-- Sidebar submenus now have **separate controls**: clicking a parent item's
-  label navigates to its section page, while clicking the **chevron** expands or
-  collapses the submenu in place. The chevron is a real `<button>` (with
-  `aria-expanded`) rendered beside the link; AdminLTE's link-hijacking treeview is
-  disabled on the sidebar, and expand/collapse plus active-trail auto-expand are
-  handled by `adminlte-drupal.js`. This gives both behaviours (navigate *and*
-  browse) instead of the click doing both at once.
-- The **Extend (modules)** page now shows each module's full description. Core
-  keeps the description in a collapsed `<details>` clipped to one line
-  (`white-space: nowrap`) and only unclips it when expanded via Claro's affordance,
-  which this stable9-based theme lacked — so descriptions render in full now.
-- Bridged the Drupal admin **components** that Claro styles (this theme is based
-  on stable9, so they were previously unstyled): **dropbuttons** (operations
-  menus) now render as a button with a floating, opaque dropdown — secondary
-  actions are relocated into a positioned menu by `adminlte-drupal.js` so they no
-  longer overflow onto neighbouring table rows; **tabledrag** handles show a grip
-  icon with a move cursor; **vertical tabs** render as a proper menu + pane;
-  **pagers** become Bootstrap pagination; jQuery-UI **modal dialogs** get a solid
-  surface, styled title bar, × close button and button pane (light + dark);
-  plus `.form-actions`, `.action-links`, inline containers and the AJAX throbber.
-- The sidebar now surfaces Drupal's **Administration menu** as a collapsible
-  AdminLTE treeview (Content, Structure, Appearance, Extend, Configuration,
-  People, Reports, Help) with per-section icons, shipped as a default block
-  placement (`adminlte_admin`). The active section is highlighted and
-  auto-expanded — resolved client-side by longest matching path, which is robust
-  across menus. The "Main navigation" menu still renders below it. New
-  `menu--admin.html.twig` + `adminlte_preprocess_menu__admin()` (which also
-  unwraps the redundant "Administration" root), and an `adminlteSidebarActive`
-  JS behavior.
-- The navbar account menu is now a proper AdminLTE **user dropdown** (avatar/icon
-  with username, plus a header and icon-prefixed "My account" / "Log out" items)
-  instead of a bare bulleted list. Anonymous users see an inline "Log in" link.
-  New `menu--account.html.twig`, `block--adminlte-account-menu.html.twig`, and
-  `adminlte_preprocess_menu__account()`; the colour-mode toggle moves left of it.
-
-### Verified
-
-- Tested on a clean Drupal 11.3.13 install (standard profile, PHP 8.5): all core
-  admin screens render with the AdminLTE shell, both colour modes work, and the
-  Drupal log is free of errors and warnings after a full browse.
-- `screenshot.png` captured from the running site; screenshots added under
-  `docs/screenshots/`.
-- Fixed admin-toolbar coexistence: the AdminLTE header is `position: relative`, so
-  offsetting it with `top` shifted the navbar over the content header (hiding the
-  page title and breadcrumb). Drupal's toolbar already offsets the body, so the
-  header offset was removed; only the sticky sidebar's stick point is nudged.
+- **Sidebar** shows Drupal's Administration menu as a collapsible AdminLTE treeview
+  with per-section icons, shipped as a default block placement. The active section
+  is highlighted and auto-expanded. Clicking a parent item's **label navigates** to
+  its section page; clicking the **chevron expands/collapses** the submenu in place
+  (a real toggle button with `aria-expanded`). "Main navigation" renders below it.
+- **Navbar user dropdown** (user picture/icon + name, a header, and icon-prefixed
+  account links); anonymous users get an inline "Log in" link.
+- **Admin components** bridged to Bootstrap/AdminLTE: operations **dropbuttons**
+  (floating, opaque menu), **tabledrag** handles, **vertical tabs**, **pagers**,
+  jQuery-UI **modal dialogs**, admin **tabs** (nav-tabs/pills) and **status
+  messages** (dismissible alerts), plus `.form-actions`, `.action-links`, inline
+  containers and the AJAX throbber. Full module descriptions on the Extend page.
+- **Light / dark** colour modes with a navbar toggle, OS-preference auto mode, and
+  a flash-free inline theme initialiser (mirrors AdminLTE core #6043).
+- **Theme settings**: default colour mode and dark sidebar.
+- Default block placement in `config/install` (and an optional Help block in
+  `config/optional`) so the theme renders immediately on enable.
+- Bridge CSS mapping Drupal's admin form/button/table markup onto Bootstrap, and a
+  displacement offset so the shell coexists with the core admin toolbar.
 
 ### Known limitations
 
-- Form/table coverage is intentionally pragmatic; deeper admin screens (Views UI,
-  Field UI, media library) may need additional bridge styles.
-- Gin-style toolbar coexistence is not specifically tuned (core toolbar is).
+- Deeper admin screens (Views UI drag-and-drop, Field UI, Media Library) may
+  benefit from additional bridge styles.
+- Gin-style toolbar coexistence is not specifically tuned (the core toolbar is).
+
+[Unreleased]: https://github.com/ColorlibHQ/adminlte-drupal/compare/1.0.0-beta1...HEAD
+[1.0.0-beta1]: https://github.com/ColorlibHQ/adminlte-drupal/releases/tag/1.0.0-beta1
