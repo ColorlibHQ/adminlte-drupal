@@ -48,11 +48,16 @@ The same AdminLTE 4 dashboard, in the framework you know best — you're looking
 
 ### With Composer (recommended)
 
+While the theme is in **beta** (no stable release yet), request it explicitly —
+Composer's default `minimum-stability: stable` would otherwise skip pre-releases:
+
 ```bash
-composer require drupal/adminlte
+composer require 'drupal/adminlte:^1.0@beta'
 drush theme:enable adminlte
 drush config:set system.theme admin adminlte   # use as the administration theme
 ```
+
+Once **1.0.0** stable is released, the plain `composer require drupal/adminlte` will work.
 
 ### Manual
 
