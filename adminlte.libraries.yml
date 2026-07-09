@@ -5,7 +5,6 @@ global-styling:
     theme:
       # Source Sans 3 (the default AdminLTE/Bootstrap body font), bundled locally.
       css/vendor/source-sans-3.css: {}
-      css/vendor/bootstrap-icons.min.css: { minified: true }
       css/adminlte.css: { minified: false }
       css/adminlte-drupal.css: {}
   js:
@@ -17,6 +16,7 @@ global-styling:
     - core/drupal
     - core/drupalSettings
     - core/once
+    - adminlte/bootstrap_icons
 
 # Right-to-left overrides. Drupal loads adminlte.rtl.css automatically for RTL
 # site languages via the .rtl.css naming convention; this library is only
