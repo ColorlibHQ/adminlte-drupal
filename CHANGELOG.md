@@ -49,6 +49,9 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- **Repositioned as an application / SaaS theme** — the project now leads with
+  dashboards, intranets and SaaS app UIs; admin use is framed as secondary
+  ([#3609481](https://www.drupal.org/project/adminlte/issues/3609481)).
 - **Base theme is now Bootstrap5** instead of the deprecated Stable9. This
   supplies Drupal core-markup glue CSS (fields, forms, tables, pager, messages)
   and adds a `drupal/bootstrap5` dependency; AdminLTE keeps its own bundled

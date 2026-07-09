@@ -4,9 +4,10 @@
 [![Drupal 10.3+ | 11](https://img.shields.io/badge/Drupal-10.3%2B%20%7C%2011-0678BE.svg?logo=drupal&logoColor=white)](https://www.drupal.org/)
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952b3.svg?logo=bootstrap&logoColor=white)](https://getbootstrap.com/docs/5.3/)
 
-Official **AdminLTE 4** admin theme for **Drupal** — Bootstrap 5.3, vanilla JS
-(no jQuery), light & dark colour modes. Self-contained: all assets are bundled
-locally, no CDN required. By [Colorlib](https://colorlib.com).
+Official **AdminLTE 4** application theme for **Drupal** — build dashboards,
+intranets and SaaS app UIs with Bootstrap 5.3, vanilla JS (no jQuery) and light &
+dark colour modes. Self-contained: all assets are bundled locally, no CDN
+required. It also works as an admin theme. By [Colorlib](https://colorlib.com).
 
 > ✅ **Officially created and maintained by [Colorlib](https://colorlib.com)** —
 > the authors of [AdminLTE](https://github.com/ColorlibHQ/AdminLTE) itself. This
@@ -16,8 +17,8 @@ Verified on **Drupal 11.3** (PHP 8.5): clean install, no errors/warnings in the
 log, all admin screens render with the AdminLTE shell in both colour modes.
 
 <p align="center">
-  <img alt="AdminLTE 4 for Drupal — admin, light theme" src="docs/screenshots/dashboard-light.png" width="49%">
-  <img alt="AdminLTE 4 for Drupal — admin, dark theme" src="docs/screenshots/dashboard-dark.png" width="49%">
+  <img alt="AdminLTE 4 for Drupal — application UI, light theme" src="docs/screenshots/dashboard-light.png" width="49%">
+  <img alt="AdminLTE 4 for Drupal — application UI, dark theme" src="docs/screenshots/dashboard-dark.png" width="49%">
 </p>
 
 ## Also available for your stack

@@ -1,6 +1,6 @@
 name: 'AdminLTE 4'
 type: theme
-description: 'Official AdminLTE 4 admin theme for Drupal — Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. By Colorlib.'
+description: 'Official AdminLTE 4 application theme for Drupal — build dashboards, intranets and SaaS app UIs with Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. Also works as an admin theme. By Colorlib.'
 package: AdminLTE
 core_version_requirement: ^10.3 || ^11
 # Bootstrap5 is a maintained base theme that supplies Drupal "glue" CSS for core
