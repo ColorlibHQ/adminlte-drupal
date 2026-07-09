@@ -17,3 +17,6 @@ adminlte.settings:
     force_rtl:
       type: boolean
       label: 'Force right-to-left (RTL) layout'
+    primary_color:
+      type: string
+      label: 'Primary (accent) colour'

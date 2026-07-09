@@ -59,4 +59,11 @@ function adminlte_form_system_theme_settings_alter(array &$form, FormStateInterf
     '#description' => t('Force the RTL stylesheet and <code>dir="rtl"</code> on every page. Leave off for RTL site languages — Drupal already loads the bundled RTL stylesheet automatically for those.'),
     '#default_value' => theme_get_setting('force_rtl', 'adminlte') ?? FALSE,
   ];
+
+  $form['adminlte']['primary_color'] = [
+    '#type' => 'color',
+    '#title' => t('Primary (accent) colour'),
+    '#description' => t('Recolours the primary accent — links, focus rings, active states and Bootstrap <code>.btn-primary</code>. Set it back to <code>#0d6efd</code> for the AdminLTE default. Note: Bootstrap components compiled with the default blue (e.g. <code>.alert-primary</code>) are not fully recoloured at runtime; deep customisation is driven by <a href=":url">AdminLTE CSS variables</a>.', [':url' => 'https://adminlte.io/themes/v4/docs/customization.html']),
+    '#default_value' => theme_get_setting('primary_color', 'adminlte') ?: '#0d6efd',
+  ];
 }

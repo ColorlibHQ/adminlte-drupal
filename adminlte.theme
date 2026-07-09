@@ -26,7 +26,69 @@ function _adminlte_layout_settings(): array {
     'sidebar_collapsed' => (bool) (theme_get_setting('sidebar_collapsed', 'adminlte') ?? FALSE),
     'compact_mode' => (bool) (theme_get_setting('compact_mode', 'adminlte') ?? FALSE),
     'force_rtl' => (bool) (theme_get_setting('force_rtl', 'adminlte') ?? FALSE),
+    'primary_color' => theme_get_setting('primary_color', 'adminlte') ?: NULL,
   ];
+}
+
+/**
+ * Builds a CSS override block that recolours the primary accent.
+ *
+ * Overrides the Bootstrap primary CSS variables (utilities, links, focus rings)
+ * plus the `.btn-primary` component variables, since Bootstrap bakes the literal
+ * default colour into compiled components rather than reading `--bs-primary`.
+ *
+ * @param string $hex
+ *   A colour as `#rrggbb` (already normalised by the core 'color' element).
+ *
+ * @return string|null
+ *   The CSS, or NULL when the colour is missing or malformed.
+ */
+function _adminlte_primary_color_css(string $hex): ?string {
+  if (!preg_match('/^#[0-9a-fA-F]{6}$/', $hex)) {
+    return NULL;
+  }
+  $rgb = static function (float $factor) use ($hex): string {
+    $r = (int) round(hexdec(substr($hex, 1, 2)) * $factor);
+    $g = (int) round(hexdec(substr($hex, 3, 2)) * $factor);
+    $b = (int) round(hexdec(substr($hex, 5, 2)) * $factor);
+    return "$r, $g, $b";
+  };
+  $shade = static function (float $factor) use ($hex): string {
+    return sprintf(
+      '#%02x%02x%02x',
+      (int) round(hexdec(substr($hex, 1, 2)) * $factor),
+      (int) round(hexdec(substr($hex, 3, 2)) * $factor),
+      (int) round(hexdec(substr($hex, 5, 2)) * $factor)
+    );
+  };
+
+  $base_rgb = $rgb(1.0);
+  $hover = $shade(0.85);
+  $active = $shade(0.75);
+
+  return <<<CSS
+:root {
+  --bs-primary: {$hex};
+  --bs-primary-rgb: {$base_rgb};
+  --bs-link-color: {$hex};
+  --bs-link-color-rgb: {$base_rgb};
+  --bs-link-hover-color: {$hover};
+}
+.btn-primary {
+  --bs-btn-bg: {$hex};
+  --bs-btn-border-color: {$hex};
+  --bs-btn-hover-bg: {$hover};
+  --bs-btn-hover-border-color: {$hover};
+  --bs-btn-active-bg: {$active};
+  --bs-btn-active-border-color: {$active};
+  --bs-btn-disabled-bg: {$hex};
+  --bs-btn-disabled-border-color: {$hex};
+  --bs-btn-focus-shadow-rgb: {$base_rgb};
+}
+.nav-pills {
+  --bs-nav-pills-link-active-bg: {$hex};
+}
+CSS;
 }
 
 /**
@@ -57,6 +119,22 @@ function adminlte_preprocess_html(array &$variables): void {
   $auth_routes = ['user.login', 'user.register', 'user.pass'];
   if (in_array(\Drupal::routeMatch()->getRouteName(), $auth_routes, TRUE)) {
     $variables['attributes']['class'][] = 'adminlte-auth-page';
+  }
+
+  // Custom primary/accent colour: inject a small <style> block in <head>.
+  // Theme settings are global config, so no cache context is needed; the config
+  // cache tag rebuilds cached pages when the colour changes. See
+  // https://www.drupal.org/project/adminlte/issues/3608660
+  if ($settings['primary_color']
+    && ($css = _adminlte_primary_color_css($settings['primary_color'])) !== NULL) {
+    $variables['#attached']['html_head'][] = [
+      [
+        '#tag' => 'style',
+        '#value' => $css,
+        '#cache' => ['tags' => ['config:adminlte.settings']],
+      ],
+      'adminlte-primary-color',
+    ];
   }
 }
 
