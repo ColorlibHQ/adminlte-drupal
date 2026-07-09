@@ -47,6 +47,11 @@ The same AdminLTE 4 dashboard, in the framework you know best — you're looking
 
 - Drupal **10.3+** or **11**
 - PHP 8.1+ (as required by your Drupal core version)
+- The [**Bootstrap5**](https://www.drupal.org/project/bootstrap5) base theme
+  (`drupal/bootstrap5`, `^4.0`). AdminLTE builds on it for Drupal's core-markup
+  "glue" CSS. Composer pulls it in automatically; for a manual install, download
+  and place it in `themes/contrib/bootstrap5` as well. AdminLTE still bundles its
+  own Bootstrap 5.3 build, so Bootstrap5's own CSS/JS is disabled.
 
 ## Installation
 

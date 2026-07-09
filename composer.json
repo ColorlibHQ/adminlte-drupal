@@ -2,6 +2,9 @@
     "name": "drupal/adminlte",
     "description": "Official AdminLTE 4 admin theme for Drupal — Bootstrap 5.3, vanilla JS, light & dark modes.",
     "type": "drupal-theme",
+    "require": {
+        "drupal/bootstrap5": "^4.0"
+    },
     "keywords": [
         "drupal",
         "theme",
