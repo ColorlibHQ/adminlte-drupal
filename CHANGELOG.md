@@ -6,6 +6,44 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+### Added
+
+- Bundle **Source Sans 3** (the default AdminLTE/Bootstrap body font) locally —
+  weights 300/400/700, Latin + Latin-Extended, under the SIL OFL. The intended
+  default typography now renders without a CDN or a system-installed font
+  ([#3609458](https://www.drupal.org/project/adminlte/issues/3609458)).
+- Theme setting **Start with the sidebar collapsed** — first-load `sidebar-collapse`
+  ([#3608687](https://www.drupal.org/project/adminlte/issues/3608687)).
+- Theme setting **Compact mode** — denser shell via `compact-mode`
+  ([#3608663](https://www.drupal.org/project/adminlte/issues/3608663)).
+- Theme setting **Force RTL layout** — `dir="rtl"` + the bundled RTL stylesheet.
+  (RTL site languages already auto-load `adminlte.rtl.css`.)
+  ([#3608661](https://www.drupal.org/project/adminlte/issues/3608661)).
+- `.gitlab-ci.yml` using the Drupal Association contrib CI template, plus a
+  cspell project dictionary
+  ([#3607152](https://www.drupal.org/project/adminlte/issues/3607152)).
+- README: navigation-block guidance (frontend vs. admin theme), a CSS Editor
+  recommendation, and a first-party-by-Colorlib note
+  ([#3608681](https://www.drupal.org/project/adminlte/issues/3608681),
+  [#3608659](https://www.drupal.org/project/adminlte/issues/3608659),
+  [#3608672](https://www.drupal.org/project/adminlte/issues/3608672)).
+
+### Changed
+
+- **Dark sidebar is now off by default** — the sidebar follows the active
+  light/dark colour mode unless the setting is enabled
+  ([#3608682](https://www.drupal.org/project/adminlte/issues/3608682)).
+- Login / register / reset-password pages render as a centred, constrained card
+  instead of spanning the full content width
+  ([#3608688](https://www.drupal.org/project/adminlte/issues/3608688)).
+
+### Fixed
+
+- Lower the `.app-header` / `.app-sidebar` z-index below Drupal's admin toolbar
+  so the toolbar (and Admin Toolbar Search autocomplete) is no longer hidden
+  behind the theme chrome
+  ([#3608932](https://www.drupal.org/project/adminlte/issues/3608932)).
+
 ## [1.0.0-beta1] - 2026-06-29
 
 First public release. Official **AdminLTE 4** admin theme for **Drupal 10.3+ / 11**

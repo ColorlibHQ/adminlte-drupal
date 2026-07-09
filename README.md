@@ -8,6 +8,10 @@ Official **AdminLTE 4** admin theme for **Drupal** — Bootstrap 5.3, vanilla JS
 (no jQuery), light & dark colour modes. Self-contained: all assets are bundled
 locally, no CDN required. By [Colorlib](https://colorlib.com).
 
+> ✅ **Officially created and maintained by [Colorlib](https://colorlib.com)** —
+> the authors of [AdminLTE](https://github.com/ColorlibHQ/AdminLTE) itself. This
+> is the first-party Drupal port, not a third-party reskin.
+
 Verified on **Drupal 11.3** (PHP 8.5): clean install, no errors/warnings in the
 log, all admin screens render with the AdminLTE shell in both colour modes.
 
@@ -93,8 +97,38 @@ At `/admin/appearance/settings/adminlte`:
 
 - **Default colour mode** — `auto` (follow OS), `light` or `dark`. Visitors can
   override it with the navbar toggle; their choice is remembered in the browser.
-- **Dark sidebar** — render the sidebar dark regardless of page mode (applied via
-  `data-bs-theme="dark"` on the sidebar).
+- **Dark sidebar** — render the sidebar dark regardless of the page colour mode
+  (applied via `data-bs-theme="dark"` on the sidebar). *Off by default* — the
+  sidebar follows the active light/dark mode unless you enable this.
+- **Start with the sidebar collapsed** — render the sidebar collapsed to icons on
+  first load (adds `sidebar-collapse sidebar-mini`). Visitors can still expand it.
+- **Compact mode** — tighten spacing across the shell (adds `compact-mode`) for
+  information-heavy admin screens.
+- **Force right-to-left (RTL) layout** — force `dir="rtl"` and the bundled RTL
+  stylesheet on every page. You usually don't need this: for RTL **site
+  languages** Drupal already loads `adminlte.rtl.css` automatically (via the
+  `.rtl.css` naming convention). Use the setting only to force RTL on an
+  LTR-language site.
+
+For customisation beyond these settings (colours, spacing, etc.), AdminLTE 4 is
+driven by [CSS variables](https://adminlte.io/themes/v4/docs/customization.html).
+To edit CSS without touching theme files or writing a subtheme, the
+[CSS Editor](https://www.drupal.org/project/css_editor) module lets you add
+custom CSS straight from the admin UI.
+
+## Navigation blocks: frontend vs. admin theme
+
+AdminLTE works both as a **frontend** theme (for applications, intranets and
+dashboards) and as an **administration** theme. Two navigation blocks are placed
+in the `sidebar` region on install, so you can pick whichever fits your use case:
+
+- **Main navigation** — your site's own menu. Use this when AdminLTE is the
+  **default (frontend) theme** for an app-style site. This is the primary use case.
+- **Administration** — Drupal's admin menu as a collapsible treeview with
+  per-section icons. Use this when AdminLTE is set as the **administration
+  theme** (`/admin/appearance` → *Administration theme*).
+
+Remove or rearrange either block at `/admin/structure/block` to suit your build.
 
 ## What's bundled
 
@@ -104,6 +138,7 @@ At `/admin/appearance/settings/adminlte`:
 | `js/adminlte.js` | AdminLTE behaviours (sidebar, treeview) |
 | `js/vendor/bootstrap.bundle.min.js` | Bootstrap 5.3 + Popper |
 | `css/vendor/bootstrap-icons.min.css` + fonts | Bootstrap Icons 1.13 |
+| `css/vendor/source-sans-3.css` + fonts | Source Sans 3 (default body font, weights 300/400/700, [OFL](css/vendor/fonts/OFL.txt)) |
 
 Everything is served from the theme — no external CDN calls.
 

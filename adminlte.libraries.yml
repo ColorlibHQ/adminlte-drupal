@@ -3,6 +3,8 @@ global-styling:
   css:
     # Bootstrap 5.3 is bundled inside adminlte.css, so no separate Bootstrap CSS.
     theme:
+      # Source Sans 3 (the default AdminLTE/Bootstrap body font), bundled locally.
+      css/vendor/source-sans-3.css: {}
       css/vendor/bootstrap-icons.min.css: { minified: true }
       css/adminlte.css: { minified: false }
       css/adminlte-drupal.css: {}
@@ -15,3 +17,15 @@ global-styling:
     - core/drupal
     - core/drupalSettings
     - core/once
+
+# Right-to-left overrides. Drupal loads adminlte.rtl.css automatically for RTL
+# site languages via the .rtl.css naming convention; this library is only
+# attached when the "Force RTL" theme setting is on, to flip the layout on
+# LTR-language sites too. Depends on global-styling so it cascades after it.
+rtl:
+  version: 4.0.2
+  css:
+    theme:
+      css/adminlte.rtl.css: {}
+  dependencies:
+    - adminlte/global-styling
