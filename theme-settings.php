@@ -66,4 +66,14 @@ function adminlte_form_system_theme_settings_alter(array &$form, FormStateInterf
     '#description' => t('Recolours the primary accent — links, focus rings, active states and Bootstrap <code>.btn-primary</code>. Set it back to <code>#0d6efd</code> for the AdminLTE default. Note: Bootstrap components compiled with the default blue (e.g. <code>.alert-primary</code>) are not fully recoloured at runtime; deep customisation is driven by <a href=":url">AdminLTE CSS variables</a>.', [':url' => 'https://adminlte.io/themes/v4/docs/customization.html']),
     '#default_value' => theme_get_setting('primary_color', 'adminlte') ?: '#0d6efd',
   ];
+
+  $form['adminlte']['sidebar_width'] = [
+    '#type' => 'number',
+    '#title' => t('Default sidebar width (px)'),
+    '#description' => t('Initial sidebar width in pixels (180–480). Visitors can drag the sidebar edge to resize it; their choice is remembered in the browser. Leave empty for the AdminLTE default (250).'),
+    '#min' => 180,
+    '#max' => 480,
+    '#step' => 1,
+    '#default_value' => theme_get_setting('sidebar_width', 'adminlte') ?: NULL,
+  ];
 }

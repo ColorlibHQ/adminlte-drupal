@@ -20,3 +20,7 @@ adminlte.settings:
     primary_color:
       type: string
       label: 'Primary (accent) colour'
+    sidebar_width:
+      type: integer
+      label: 'Default sidebar width (px)'
+      nullable: true

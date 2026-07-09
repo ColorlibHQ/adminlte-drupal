@@ -27,6 +27,7 @@ function _adminlte_layout_settings(): array {
     'compact_mode' => (bool) (theme_get_setting('compact_mode', 'adminlte') ?? FALSE),
     'force_rtl' => (bool) (theme_get_setting('force_rtl', 'adminlte') ?? FALSE),
     'primary_color' => theme_get_setting('primary_color', 'adminlte') ?: NULL,
+    'sidebar_width' => theme_get_setting('sidebar_width', 'adminlte') ?: NULL,
   ];
 }
 
@@ -144,6 +145,7 @@ function adminlte_preprocess_html(array &$variables): void {
 function adminlte_preprocess_page(array &$variables): void {
   $settings = _adminlte_layout_settings();
   $variables['sidebar_dark'] = $settings['sidebar_dark'];
+  $variables['sidebar_width'] = $settings['sidebar_width'];
 }
 
 /**

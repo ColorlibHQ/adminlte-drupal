@@ -232,6 +232,49 @@ details > summary {
 }
 
 /* -------------------------------------------------------------------------- *
+ * Resizable sidebar (desktop only). The handle sits on the sidebar's inline-end
+ * edge; the width is applied as `--lte-sidebar-width` and persisted by
+ * adminlte-drupal.js. See https://www.drupal.org/project/adminlte/issues/3609296
+ * -------------------------------------------------------------------------- */
+.sidebar-resize-handle {
+  display: none;
+}
+
+/* Suppress the width transition while dragging (and on the initial apply). */
+.app-sidebar.is-resizing {
+  transition: none;
+}
+
+.app-sidebar.is-resizing,
+.app-sidebar.is-resizing * {
+  user-select: none;
+}
+
+@media (min-width: 992px) {
+  .sidebar-resize-handle {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: -3px;
+    z-index: 5;
+    display: block;
+    width: 6px;
+    cursor: col-resize;
+    touch-action: none;
+  }
+
+  .sidebar-resize-handle:hover,
+  .sidebar-resize-handle:focus-visible {
+    background-color: rgba(var(--bs-primary-rgb), 0.5);
+    outline: none;
+  }
+
+  /* No resize affordance when the sidebar is collapsed to icons. */
+  .sidebar-collapse .sidebar-resize-handle {
+    display: none;
+  }
+}
+
+/* -------------------------------------------------------------------------- *
  * Sidebar treeview: the chevron is a separate toggle button so clicking the
  * link navigates to the section page while the chevron expands/collapses the
  * submenu in place. (AdminLTE's link-hijacking treeview is disabled on the
