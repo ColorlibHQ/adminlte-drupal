@@ -1,0 +1,7 @@
+default_color_mode: auto
+sidebar_dark: false
+sidebar_collapsed: false
+compact_mode: false
+force_rtl: false
+primary_color: '#000000'
+sidebar_width: null
