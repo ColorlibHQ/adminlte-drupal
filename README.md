@@ -157,6 +157,13 @@ it to 10.3–11.0), and the pack appears in every icon picker — menu-link icon
 CKEditor, fields, etc. — using the already-bundled font. Nothing extra to download,
 and the theme works fine without it.
 
+## Component reference
+
+Open [`docs/components.html`](docs/components.html) in a browser (straight from
+the theme folder — no Drupal needed) for a self-contained showcase of the
+AdminLTE 4 / Bootstrap 5.3 components this theme provides: buttons, cards,
+tables, forms, tabs, pagination, alerts, badges and icons, in both colour modes.
+
 ## Tested
 
 Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<!--
+  AdminLTE 4 for Drupal — components overview / demo page.
+
+  A self-contained showcase of the AdminLTE 4 + Bootstrap 5.3 components this
+  theme provides, using the theme's own bundled CSS/JS (relative paths). Open it
+  straight from the theme folder in a browser — no Drupal or build step needed.
+
+  Why a static file? Drupal themes cannot register routes, so a live in-admin
+  demo page would need a small companion module. This file gives site builders
+  the same reference offline. See
+  https://www.drupal.org/project/adminlte/issues/3608677
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AdminLTE 4 for Drupal — Components</title>
+    <!-- Resolve the colour mode early to avoid a flash (mirrors html.html.twig). -->
+    <script>
+      (() => {
+        const stored = (() => { try { return localStorage.getItem('lte-theme'); } catch { return null; } })();
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const mode = stored === 'dark' || stored === 'light' ? stored : (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-bs-theme', mode);
+        document.documentElement.style.colorScheme = mode;
+      })();
+    </script>
+    <link rel="stylesheet" href="../css/vendor/source-sans-3.css">
+    <link rel="stylesheet" href="../css/vendor/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/adminlte.css">
+    <link rel="stylesheet" href="../css/adminlte-drupal.css">
+  </head>
+  <body class="layout-fixed sidebar-expand-lg bg-body-tertiary">
+    <div class="app-wrapper">
+      <!-- Header -->
+      <nav class="app-header navbar navbar-expand bg-body">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button" aria-label="Toggle navigation">
+                <i class="bi bi-list" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="nav-item d-none d-md-block">
+              <span class="nav-link">Components</span>
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <button type="button" class="nav-link btn btn-link border-0" data-demo-theme-toggle aria-label="Toggle dark mode">
+                <i class="bi bi-moon-stars" aria-hidden="true"></i>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Sidebar -->
+      <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
+        <div class="sidebar-brand">
+          <a href="#" class="brand-link">
+            <i class="bi bi-speedometer2 me-2" aria-hidden="true"></i>
+            <span class="brand-text fw-light">AdminLTE 4</span>
+          </a>
+        </div>
+        <div class="sidebar-wrapper">
+          <nav class="mt-2">
+            <ul class="nav sidebar-menu flex-column" role="menu">
+              <li class="nav-item"><a href="#typography" class="nav-link"><i class="nav-icon bi bi-fonts"></i><p>Typography</p></a></li>
+              <li class="nav-item"><a href="#buttons" class="nav-link"><i class="nav-icon bi bi-hand-index"></i><p>Buttons</p></a></li>
+              <li class="nav-item"><a href="#alerts" class="nav-link"><i class="nav-icon bi bi-exclamation-triangle"></i><p>Alerts &amp; badges</p></a></li>
+              <li class="nav-item"><a href="#cards" class="nav-link"><i class="nav-icon bi bi-window"></i><p>Cards</p></a></li>
+              <li class="nav-item"><a href="#tables" class="nav-link"><i class="nav-icon bi bi-table"></i><p>Tables</p></a></li>
+              <li class="nav-item"><a href="#forms" class="nav-link"><i class="nav-icon bi bi-input-cursor-text"></i><p>Forms</p></a></li>
+              <li class="nav-item"><a href="#navs" class="nav-link"><i class="nav-icon bi bi-segmented-nav"></i><p>Navs &amp; pagination</p></a></li>
+              <li class="nav-item"><a href="#icons" class="nav-link"><i class="nav-icon bi bi-emoji-smile"></i><p>Icons</p></a></li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+
+      <!-- Main -->
+      <main class="app-main">
+        <div class="app-content-header">
+          <div class="container-fluid">
+            <div class="row align-items-center">
+              <div class="col-sm-6"><h1 class="mb-0 h3">Components</h1></div>
+              <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-end">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Components</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-content">
+          <div class="container-fluid">
+
+            <div class="alert alert-info d-flex align-items-start" role="alert">
+              <i class="bi bi-info-circle me-2 fs-5" aria-hidden="true"></i>
+              <div>
+                A living reference of the AdminLTE 4 / Bootstrap 5.3 classes this theme ships. Toggle light/dark in the navbar.
+                Full docs: <a href="https://adminlte.io/themes/v4/docs/" class="alert-link">AdminLTE</a> ·
+                <a href="https://getbootstrap.com/docs/5.3/" class="alert-link">Bootstrap 5.3</a>.
+              </div>
+            </div>
+
+            <!-- Typography -->
+            <section id="typography" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Typography</h2></div>
+              <div class="card-body">
+                <h1>h1. Heading</h1>
+                <h3>h3. Heading</h3>
+                <p class="lead">Lead paragraph — Source Sans 3, bundled with the theme.</p>
+                <p>Body text with a <a href="#typography">link</a>, <strong>bold</strong>, <em>italic</em> and <code>inline code</code>.</p>
+                <blockquote class="blockquote"><p class="mb-0">A block quotation rendered by Bootstrap.</p></blockquote>
+              </div>
+            </section>
+
+            <!-- Buttons -->
+            <section id="buttons" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Buttons</h2></div>
+              <div class="card-body d-flex flex-wrap gap-2">
+                <button class="btn btn-primary">Primary</button>
+                <button class="btn btn-secondary">Secondary</button>
+                <button class="btn btn-success">Success</button>
+                <button class="btn btn-danger">Danger</button>
+                <button class="btn btn-warning">Warning</button>
+                <button class="btn btn-info">Info</button>
+                <button class="btn btn-outline-primary">Outline</button>
+                <button class="btn btn-primary"><i class="bi bi-download me-1"></i> With icon</button>
+                <button class="btn btn-primary btn-sm">Small</button>
+                <button class="btn btn-primary" disabled>Disabled</button>
+              </div>
+            </section>
+
+            <!-- Alerts & badges -->
+            <section id="alerts" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Alerts &amp; badges</h2></div>
+              <div class="card-body">
+                <div class="alert alert-success" role="alert">Success — matches Drupal's status message.</div>
+                <div class="alert alert-warning" role="alert">Warning message.</div>
+                <div class="alert alert-danger" role="alert">Error message.</div>
+                <div class="d-flex flex-wrap gap-2 align-items-center">
+                  <span class="badge text-bg-primary">Primary</span>
+                  <span class="badge text-bg-success">Success</span>
+                  <span class="badge text-bg-danger">Danger</span>
+                  <span class="badge rounded-pill text-bg-secondary">Pill</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- Cards -->
+            <section id="cards" class="mb-4">
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-header">Card header</div>
+                    <div class="card-body">
+                      <h3 class="card-title h6">Card title</h3>
+                      <p class="card-text">Cards are AdminLTE's primary content container.</p>
+                      <a href="#cards" class="btn btn-primary btn-sm">Action</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card text-bg-primary">
+                    <div class="card-body">
+                      <h3 class="card-title h6">Coloured card</h3>
+                      <p class="card-text mb-0">Use <code>text-bg-*</code> utilities for accents.</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card">
+                    <div class="card-body d-flex align-items-center">
+                      <i class="bi bi-people fs-1 text-primary me-3"></i>
+                      <div><div class="fs-4 fw-semibold">1,024</div><div class="text-secondary">Users</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Tables -->
+            <section id="tables" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Tables</h2></div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-striped align-middle">
+                    <thead><tr><th>#</th><th>Title</th><th>Author</th><th>Status</th><th>Operations</th></tr></thead>
+                    <tbody>
+                      <tr><td>1</td><td>Welcome</td><td>admin</td><td><span class="badge text-bg-success">Published</span></td><td><button class="btn btn-sm btn-outline-secondary">Edit</button></td></tr>
+                      <tr><td>2</td><td>Draft article</td><td>editor</td><td><span class="badge text-bg-secondary">Draft</span></td><td><button class="btn btn-sm btn-outline-secondary">Edit</button></td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </section>
+
+            <!-- Forms -->
+            <section id="forms" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Forms</h2></div>
+              <div class="card-body">
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label" for="demo-text">Text field</label>
+                    <input type="text" class="form-control" id="demo-text" placeholder="Enter text">
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label" for="demo-select">Select</label>
+                    <select class="form-select" id="demo-select"><option>One</option><option>Two</option></select>
+                  </div>
+                  <div class="col-12">
+                    <label class="form-label" for="demo-area">Textarea</label>
+                    <textarea class="form-control" id="demo-area" rows="2"></textarea>
+                  </div>
+                  <div class="col-12 form-check">
+                    <input class="form-check-input" type="checkbox" id="demo-check" checked>
+                    <label class="form-check-label" for="demo-check">Checkbox</label>
+                  </div>
+                  <div class="col-12"><button class="btn btn-primary">Save</button></div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Navs & pagination -->
+            <section id="navs" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Navs, tabs &amp; pagination</h2></div>
+              <div class="card-body">
+                <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-a" type="button">Active</button></li>
+                  <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-b" type="button">Second</button></li>
+                </ul>
+                <div class="tab-content border border-top-0 p-3 mb-3">
+                  <div class="tab-pane fade show active" id="tab-a">First tab content — same look as Drupal's admin tabs.</div>
+                  <div class="tab-pane fade" id="tab-b">Second tab content.</div>
+                </div>
+                <ul class="nav nav-pills mb-3">
+                  <li class="nav-item"><a class="nav-link active" href="#navs">Pills</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#navs">Two</a></li>
+                </ul>
+                <nav aria-label="Pager">
+                  <ul class="pagination mb-0">
+                    <li class="page-item disabled"><span class="page-link">Previous</span></li>
+                    <li class="page-item active"><span class="page-link">1</span></li>
+                    <li class="page-item"><a class="page-link" href="#navs">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#navs">Next</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </section>
+
+            <!-- Icons -->
+            <section id="icons" class="card mb-4">
+              <div class="card-header"><h2 class="card-title h5 mb-0">Bootstrap Icons</h2></div>
+              <div class="card-body">
+                <p class="text-secondary">~2,000 icons bundled. Also available to Drupal's Icon API via the <code>ui_icons</code> module.</p>
+                <div class="fs-3 d-flex flex-wrap gap-3">
+                  <i class="bi bi-house" title="house"></i>
+                  <i class="bi bi-gear" title="gear"></i>
+                  <i class="bi bi-people" title="people"></i>
+                  <i class="bi bi-file-earmark-text" title="content"></i>
+                  <i class="bi bi-bell" title="bell"></i>
+                  <i class="bi bi-search" title="search"></i>
+                  <i class="bi bi-heart" title="heart"></i>
+                  <i class="bi bi-star-fill text-warning" title="star"></i>
+                  <i class="bi bi-check-circle text-success" title="check"></i>
+                  <i class="bi bi-trash text-danger" title="trash"></i>
+                </div>
+              </div>
+            </section>
+
+          </div>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <strong>AdminLTE 4 for Drupal</strong> — by Colorlib. Components demo.
+      </footer>
+    </div>
+
+    <script src="../js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="../js/adminlte.js"></script>
+    <script>
+      // Minimal colour-mode toggle for the demo (the Drupal theme uses adminlte-drupal.js).
+      document.querySelectorAll('[data-demo-theme-toggle]').forEach((btn) => {
+        const sync = () => {
+          const dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+          const i = btn.querySelector('i');
+          if (i) i.className = dark ? 'bi bi-sun' : 'bi bi-moon-stars';
+        };
+        sync();
+        btn.addEventListener('click', () => {
+          const dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+          const mode = dark ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-bs-theme', mode);
+          document.documentElement.style.colorScheme = mode;
+          try { localStorage.setItem('lte-theme', mode); } catch { /* ignore */ }
+          sync();
+        });
+      });
+    </script>
+  </body>
+</html>

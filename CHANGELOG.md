@@ -8,6 +8,17 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
+- **Primary/accent colour picker** in theme settings — recolours links, focus
+  rings, active states and `.btn-primary`
+  ([#3608660](https://www.drupal.org/project/adminlte/issues/3608660)).
+- **Drag-resizable sidebar** with a localStorage-persisted width and a
+  configurable default width setting
+  ([#3609296](https://www.drupal.org/project/adminlte/issues/3609296)).
+- **Bootstrap Icons pack** for Drupal's Icon API (`adminlte.icons.yml`) — optional,
+  activates when `ui_icons` (`ui_icons_font`) is enabled
+  ([#3609048](https://www.drupal.org/project/adminlte/issues/3609048)).
+- **Components demo** at `docs/components.html`
+  ([#3608677](https://www.drupal.org/project/adminlte/issues/3608677)).
 - Bundle **Source Sans 3** (the default AdminLTE/Bootstrap body font) locally —
   weights 300/400/700, Latin + Latin-Extended, under the SIL OFL. The intended
   default typography now renders without a CDN or a system-installed font
@@ -30,6 +41,12 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
+- **Base theme is now Bootstrap5** instead of the deprecated Stable9. This
+  supplies Drupal core-markup glue CSS (fields, forms, tables, pager, messages)
+  and adds a `drupal/bootstrap5` dependency; AdminLTE keeps its own bundled
+  Bootstrap build (Bootstrap5's CSS/JS is disabled)
+  ([#3609244](https://www.drupal.org/project/adminlte/issues/3609244),
+  [#3608934](https://www.drupal.org/project/adminlte/issues/3608934)).
 - **Dark sidebar is now off by default** — the sidebar follows the active
   light/dark colour mode unless the setting is enabled
   ([#3608682](https://www.drupal.org/project/adminlte/issues/3608682)).
