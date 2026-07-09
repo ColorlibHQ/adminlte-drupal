@@ -1,0 +1,20 @@
+/**
+ * @file
+ * Styling for the theme-provided Bootstrap layouts (adminlte.layouts.yml).
+ *
+ * The layouts emit Bootstrap .row/.col markup, which supplies the grid; this
+ * only adds vertical rhythm between layout sections and keeps empty regions
+ * grabbable in the Layout Builder editor.
+ */
+.adminlte-layout {
+  margin-bottom: 1.5rem;
+}
+
+.adminlte-layout:last-child {
+  margin-bottom: 0;
+}
+
+/* In the Layout Builder editor, give empty regions a usable drop target. */
+.adminlte-layout .layout-builder__region:empty {
+  min-height: 3rem;
+}

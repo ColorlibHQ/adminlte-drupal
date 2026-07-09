@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * AdminLTE three-column (⅓ + ⅓ + ⅓) layout for Layout Builder.
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('adminlte-layout', 'adminlte-layout--three-column', 'row', 'g-3') }}>
+    {% if content.first %}
+      <div{{ region_attributes.first.addClass('col-12', 'col-md-4') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+    {% if content.second %}
+      <div{{ region_attributes.second.addClass('col-12', 'col-md-4') }}>
+        {{ content.second }}
+      </div>
+    {% endif %}
+    {% if content.third %}
+      <div{{ region_attributes.third.addClass('col-12', 'col-md-4') }}>
+        {{ content.third }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

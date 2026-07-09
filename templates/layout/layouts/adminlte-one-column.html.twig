@@ -1,0 +1,11 @@
+{#
+/**
+ * @file
+ * AdminLTE one-column layout for Layout Builder.
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('adminlte-layout', 'adminlte-layout--one-column') }}>
+    {{ content.content }}
+  </div>
+{% endif %}

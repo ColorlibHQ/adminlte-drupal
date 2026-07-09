@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * AdminLTE two-column (½ + ½) layout for Layout Builder.
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('adminlte-layout', 'adminlte-layout--two-column', 'row', 'g-3') }}>
+    {% if content.first %}
+      <div{{ region_attributes.first.addClass('col-12', 'col-md-6') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+    {% if content.second %}
+      <div{{ region_attributes.second.addClass('col-12', 'col-md-6') }}>
+        {{ content.second }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

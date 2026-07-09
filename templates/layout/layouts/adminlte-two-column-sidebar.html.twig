@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * AdminLTE content + sidebar (⅔ + ⅓) layout for Layout Builder.
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('adminlte-layout', 'adminlte-layout--two-column-sidebar', 'row', 'g-3') }}>
+    {% if content.main %}
+      <div{{ region_attributes.main.addClass('col-12', 'col-lg-8') }}>
+        {{ content.main }}
+      </div>
+    {% endif %}
+    {% if content.sidebar %}
+      <div{{ region_attributes.sidebar.addClass('col-12', 'col-lg-4') }}>
+        {{ content.sidebar }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

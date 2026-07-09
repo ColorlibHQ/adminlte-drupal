@@ -38,3 +38,10 @@ bootstrap_icons:
   css:
     component:
       css/vendor/bootstrap-icons.min.css: { minified: true }
+
+# Spacing/helpers for the theme-provided Bootstrap layouts (adminlte.layouts.yml).
+layouts:
+  version: 4.0.2
+  css:
+    layout:
+      css/layouts.css: {}
