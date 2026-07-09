@@ -19,15 +19,15 @@ use Drupal\Core\Url;
  */
 function _adminlte_layout_settings(): array {
   return [
-    'default_color_mode' => theme_get_setting('default_color_mode', 'adminlte') ?? 'auto',
+    'default_color_mode' => theme_get_setting('default_color_mode') ?? 'auto',
     // The sidebar follows the active colour mode by default; a dark override is
     // opt-in (see https://www.drupal.org/project/adminlte/issues/3608682).
-    'sidebar_dark' => (bool) (theme_get_setting('sidebar_dark', 'adminlte') ?? FALSE),
-    'sidebar_collapsed' => (bool) (theme_get_setting('sidebar_collapsed', 'adminlte') ?? FALSE),
-    'compact_mode' => (bool) (theme_get_setting('compact_mode', 'adminlte') ?? FALSE),
-    'force_rtl' => (bool) (theme_get_setting('force_rtl', 'adminlte') ?? FALSE),
-    'primary_color' => theme_get_setting('primary_color', 'adminlte') ?: NULL,
-    'sidebar_width' => theme_get_setting('sidebar_width', 'adminlte') ?: NULL,
+    'sidebar_dark' => (bool) (theme_get_setting('sidebar_dark') ?? FALSE),
+    'sidebar_collapsed' => (bool) (theme_get_setting('sidebar_collapsed') ?? FALSE),
+    'compact_mode' => (bool) (theme_get_setting('compact_mode') ?? FALSE),
+    'force_rtl' => (bool) (theme_get_setting('force_rtl') ?? FALSE),
+    'primary_color' => theme_get_setting('primary_color') ?: NULL,
+    'sidebar_width' => theme_get_setting('sidebar_width') ?: NULL,
   ];
 }
 
