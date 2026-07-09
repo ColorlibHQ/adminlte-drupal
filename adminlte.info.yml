@@ -3,13 +3,31 @@ type: theme
 description: 'Official AdminLTE 4 admin theme for Drupal — Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. By Colorlib.'
 package: AdminLTE
 core_version_requirement: ^10.3 || ^11
-base theme: stable9
+# Bootstrap5 is a maintained base theme that supplies Drupal "glue" CSS for core
+# markup (field--label-inline, forms, tables, pager, messages …) that Stable9
+# (now deprecated) does not. We inherit that glue but keep AdminLTE's own bundled
+# Bootstrap build. See #3609244 (replaces Stable9) and #3608934 (base CSS).
+base theme: bootstrap5
 screenshot: screenshot.png
 logo: logo.svg
 
 # Load the global AdminLTE styling/behaviour on every page.
 libraries:
   - adminlte/global-styling
+
+# Keep Bootstrap5's core-markup glue (bootstrap5/base + bootstrap5/messages, both
+# in the CSS "component" group) but drop its own compiled Bootstrap CSS and JS —
+# AdminLTE already bundles Bootstrap 5.3 (css/adminlte.css) and the Bootstrap JS
+# bundle. Our theme-group CSS loads after the inherited component-group CSS, so
+# the AdminLTE look wins where the two overlap.
+libraries-override:
+  bootstrap5/global-styling: false
+  bootstrap5/bootstrap5-js-latest: false
+
+# Style CKEditor 5 content to match the theme rather than inheriting Bootstrap5's
+# css/ck5style.css.
+ckeditor5-stylesheets:
+  - css/adminlte.css
 
 regions:
   page_top: 'Page top'

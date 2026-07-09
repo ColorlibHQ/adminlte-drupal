@@ -1,0 +1,54 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Info box
+status: stable
+group: AdminLTE
+description: 'AdminLTE info box: a coloured icon beside a label and figure, with an optional progress bar. Discovered by UI Patterns 2 for Layout Builder, Views and field formatters.'
+libraryOverrides:
+  dependencies:
+    - adminlte/global-styling
+props:
+  type: object
+  required:
+    - label
+    - value
+  properties:
+    label:
+      type: string
+      title: Label
+      examples:
+        - 'Bookmarks'
+    value:
+      type: string
+      title: Value
+      examples:
+        - '41,410'
+    icon:
+      type: string
+      title: 'Icon'
+      description: 'A Bootstrap Icons name without the "bi-" prefix.'
+      examples:
+        - bookmark
+        - gear
+    color:
+      type: string
+      title: Colour
+      enum:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+      default: primary
+    progress:
+      type: ['integer', 'null']
+      title: 'Progress (0–100)'
+      description: 'Show a progress bar under the figure.'
+    description:
+      type: string
+      title: 'Progress description'
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes

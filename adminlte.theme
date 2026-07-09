@@ -14,20 +14,129 @@ use Drupal\Core\Url;
  * Returns the theme's layout settings with sane defaults.
  *
  * @return array
- *   Keyed by: default_color_mode, sidebar_dark.
+ *   Keyed by: default_color_mode, sidebar_dark, sidebar_collapsed,
+ *   compact_mode, force_rtl.
  */
 function _adminlte_layout_settings(): array {
   return [
     'default_color_mode' => theme_get_setting('default_color_mode', 'adminlte') ?? 'auto',
-    'sidebar_dark' => (bool) (theme_get_setting('sidebar_dark', 'adminlte') ?? TRUE),
+    // The sidebar follows the active colour mode by default; a dark override is
+    // opt-in (see https://www.drupal.org/project/adminlte/issues/3608682).
+    'sidebar_dark' => (bool) (theme_get_setting('sidebar_dark', 'adminlte') ?? FALSE),
+    'sidebar_collapsed' => (bool) (theme_get_setting('sidebar_collapsed', 'adminlte') ?? FALSE),
+    'compact_mode' => (bool) (theme_get_setting('compact_mode', 'adminlte') ?? FALSE),
+    'force_rtl' => (bool) (theme_get_setting('force_rtl', 'adminlte') ?? FALSE),
+    'primary_color' => theme_get_setting('primary_color', 'adminlte') ?: NULL,
+    'sidebar_width' => theme_get_setting('sidebar_width', 'adminlte') ?: NULL,
   ];
+}
+
+/**
+ * Builds a CSS override block that recolours the primary accent.
+ *
+ * Overrides the Bootstrap primary CSS variables (utilities, links, focus rings)
+ * plus the `.btn-primary` component variables, since Bootstrap bakes the literal
+ * default colour into compiled components rather than reading `--bs-primary`.
+ *
+ * @param string $hex
+ *   A colour as `#rrggbb` (already normalised by the core 'color' element).
+ *
+ * @return string|null
+ *   The CSS, or NULL when the colour is missing or malformed.
+ */
+function _adminlte_primary_color_css(string $hex): ?string {
+  if (!preg_match('/^#[0-9a-fA-F]{6}$/', $hex)) {
+    return NULL;
+  }
+  $rgb = static function (float $factor) use ($hex): string {
+    $r = (int) round(hexdec(substr($hex, 1, 2)) * $factor);
+    $g = (int) round(hexdec(substr($hex, 3, 2)) * $factor);
+    $b = (int) round(hexdec(substr($hex, 5, 2)) * $factor);
+    return "$r, $g, $b";
+  };
+  $shade = static function (float $factor) use ($hex): string {
+    return sprintf(
+      '#%02x%02x%02x',
+      (int) round(hexdec(substr($hex, 1, 2)) * $factor),
+      (int) round(hexdec(substr($hex, 3, 2)) * $factor),
+      (int) round(hexdec(substr($hex, 5, 2)) * $factor)
+    );
+  };
+
+  $base_rgb = $rgb(1.0);
+  $hover = $shade(0.85);
+  $active = $shade(0.75);
+
+  return <<<CSS
+:root {
+  --bs-primary: {$hex};
+  --bs-primary-rgb: {$base_rgb};
+  --bs-link-color: {$hex};
+  --bs-link-color-rgb: {$base_rgb};
+  --bs-link-hover-color: {$hover};
+}
+.btn-primary {
+  --bs-btn-bg: {$hex};
+  --bs-btn-border-color: {$hex};
+  --bs-btn-hover-bg: {$hover};
+  --bs-btn-hover-border-color: {$hover};
+  --bs-btn-active-bg: {$active};
+  --bs-btn-active-border-color: {$active};
+  --bs-btn-disabled-bg: {$hex};
+  --bs-btn-disabled-border-color: {$hex};
+  --bs-btn-focus-shadow-rgb: {$base_rgb};
+}
+.nav-pills {
+  --bs-nav-pills-link-active-bg: {$hex};
+}
+CSS;
 }
 
 /**
  * Implements hook_preprocess_HOOK() for html.html.twig.
  */
 function adminlte_preprocess_html(array &$variables): void {
-  $variables['default_color_mode'] = _adminlte_layout_settings()['default_color_mode'];
+  $settings = _adminlte_layout_settings();
+  $variables['default_color_mode'] = $settings['default_color_mode'];
+
+  // Body-level layout toggles consumed by html.html.twig.
+  $variables['sidebar_collapsed'] = $settings['sidebar_collapsed'];
+  $variables['compact_mode'] = $settings['compact_mode'];
+
+  // Force RTL: flip the document direction and load the bundled RTL stylesheet.
+  // (For RTL *site languages* Drupal already swaps in adminlte.rtl.css via the
+  // .rtl.css naming convention, so this is only for forcing RTL everywhere.)
+  if ($settings['force_rtl']) {
+    if (isset($variables['html_attributes'])) {
+      $variables['html_attributes']->setAttribute('dir', 'rtl');
+    }
+    $variables['#attached']['library'][] = 'adminlte/rtl';
+  }
+
+  // Tag the authentication pages (log in, register, reset password) so their
+  // forms can render as a centred, constrained card instead of spanning the
+  // full content width. See
+  // https://www.drupal.org/project/adminlte/issues/3608688
+  $auth_routes = ['user.login', 'user.register', 'user.pass'];
+  if (in_array(\Drupal::routeMatch()->getRouteName(), $auth_routes, TRUE)) {
+    $variables['attributes']['class'][] = 'adminlte-auth-page';
+  }
+
+  // Custom primary/accent colour: inject a small <style> block in <head>.
+  // Theme settings are global config, so no cache context is needed; the config
+  // cache tag rebuilds cached pages when the colour changes. See
+  // https://www.drupal.org/project/adminlte/issues/3608660
+  if ($settings['primary_color']
+    && ($css = _adminlte_primary_color_css($settings['primary_color'])) !== NULL) {
+    $variables['#attached']['html_head'][] = [
+      [
+        '#tag' => 'style',
+        '#value' => $css,
+        '#cache' => ['tags' => ['config:adminlte.settings']],
+      ],
+      'adminlte-primary-color',
+    ];
+  }
 }
 
 /**
@@ -36,6 +145,7 @@ function adminlte_preprocess_html(array &$variables): void {
 function adminlte_preprocess_page(array &$variables): void {
   $settings = _adminlte_layout_settings();
   $variables['sidebar_dark'] = $settings['sidebar_dark'];
+  $variables['sidebar_width'] = $settings['sidebar_width'];
 }
 
 /**

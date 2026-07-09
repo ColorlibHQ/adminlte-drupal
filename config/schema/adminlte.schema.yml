@@ -8,3 +8,32 @@ adminlte.settings:
     sidebar_dark:
       type: boolean
       label: 'Dark sidebar'
+    sidebar_collapsed:
+      type: boolean
+      label: 'Start with the sidebar collapsed'
+    compact_mode:
+      type: boolean
+      label: 'Compact mode'
+    force_rtl:
+      type: boolean
+      label: 'Force right-to-left (RTL) layout'
+    primary_color:
+      type: string
+      label: 'Primary (accent) colour'
+    sidebar_width:
+      type: integer
+      label: 'Default sidebar width (px)'
+      nullable: true
+
+# Per-icon settings for the Bootstrap Icons pack (adminlte.icons.yml), validated
+# by the ui_icons module when icons are stored in config.
+ui_icons.icon_pack_options.bootstrap_icons:
+  type: mapping
+  label: 'Bootstrap Icons settings'
+  mapping:
+    size:
+      type: integer
+      label: 'Size (px)'
+    class:
+      type: string
+      label: 'Additional CSS class'

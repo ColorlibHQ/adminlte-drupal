@@ -1,0 +1,23 @@
+{#
+/**
+ * @file
+ * AdminLTE "small box" stat widget.
+ *
+ * Available props: value, label, icon, color, url, link_text, attributes.
+ */
+#}
+{% set attributes = attributes.addClass('small-box', 'text-bg-' ~ (color|default('primary'))) %}
+<div{{ attributes }}>
+  <div class="inner">
+    <h3>{{ value }}</h3>
+    <p>{{ label }}</p>
+  </div>
+  {% if icon %}
+    <span class="small-box-icon"><i class="bi bi-{{ icon }}" aria-hidden="true"></i></span>
+  {% endif %}
+  {% if url %}
+    <a href="{{ url }}" class="small-box-footer">
+      {{ link_text|default('More info'|t) }} <i class="bi bi-arrow-right-circle" aria-hidden="true"></i>
+    </a>
+  {% endif %}
+</div>

@@ -1,0 +1,15 @@
+{#
+/**
+ * @file
+ * AdminLTE "callout" highlight box.
+ *
+ * Props: title, type, attributes. Slot: body.
+ */
+#}
+{% set attributes = attributes.addClass('callout', 'callout-' ~ (type|default('info'))) %}
+<div{{ attributes }}>
+  {% if title %}
+    <h5>{{ title }}</h5>
+  {% endif %}
+  {% block body %}{% endblock %}
+</div>

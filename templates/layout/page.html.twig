@@ -44,7 +44,7 @@
   {# end::Header #}
 
   {# begin::Sidebar #}
-  <aside class="app-sidebar shadow{{ sidebar_dark ? ' bg-body-secondary' : ' bg-body' }}"{% if sidebar_dark %} data-bs-theme="dark"{% endif %}>
+  <aside class="app-sidebar shadow{{ sidebar_dark ? ' bg-body-secondary' : ' bg-body' }}"{% if sidebar_dark %} data-bs-theme="dark"{% endif %}{% if sidebar_width %} data-adminlte-sidebar-width="{{ sidebar_width }}"{% endif %}>
     <div class="sidebar-brand">
       {% if page.sidebar_brand %}
         {{ page.sidebar_brand }}

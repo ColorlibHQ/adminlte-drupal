@@ -1,0 +1,38 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Callout
+status: stable
+group: AdminLTE
+description: 'AdminLTE callout: a coloured, left-bordered highlight box with a title and rich body slot. Discovered by UI Patterns 2 for Layout Builder, Views and field formatters.'
+libraryOverrides:
+  dependencies:
+    - adminlte/global-styling
+props:
+  type: object
+  properties:
+    title:
+      type: string
+      title: Title
+      examples:
+        - 'I am a callout!'
+    type:
+      type: string
+      title: Type
+      enum:
+        - info
+        - success
+        - warning
+        - danger
+        - primary
+        - secondary
+        - dark
+        - light
+      default: info
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes
+slots:
+  body:
+    title: Body
+    description: 'The callout contents.'
+    examples:
+      - '<p>Follow the steps below to finish setup.</p>'

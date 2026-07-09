@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * AdminLTE four-column layout for Layout Builder.
+ */
+#}
+{% if content %}
+  <div{{ attributes.addClass('adminlte-layout', 'adminlte-layout--four-column', 'row', 'g-3') }}>
+    {% if content.first %}
+      <div{{ region_attributes.first.addClass('col-12', 'col-sm-6', 'col-lg-3') }}>
+        {{ content.first }}
+      </div>
+    {% endif %}
+    {% if content.second %}
+      <div{{ region_attributes.second.addClass('col-12', 'col-sm-6', 'col-lg-3') }}>
+        {{ content.second }}
+      </div>
+    {% endif %}
+    {% if content.third %}
+      <div{{ region_attributes.third.addClass('col-12', 'col-sm-6', 'col-lg-3') }}>
+        {{ content.third }}
+      </div>
+    {% endif %}
+    {% if content.fourth %}
+      <div{{ region_attributes.fourth.addClass('col-12', 'col-sm-6', 'col-lg-3') }}>
+        {{ content.fourth }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

@@ -35,7 +35,45 @@ function adminlte_form_system_theme_settings_alter(array &$form, FormStateInterf
   $form['adminlte']['sidebar_dark'] = [
     '#type' => 'checkbox',
     '#title' => t('Dark sidebar'),
-    '#description' => t('Render the sidebar with a dark surface regardless of the page colour mode.'),
-    '#default_value' => theme_get_setting('sidebar_dark', 'adminlte') ?? TRUE,
+    '#description' => t('Render the sidebar with a dark surface regardless of the page colour mode. When off, the sidebar follows the active light/dark colour mode.'),
+    '#default_value' => theme_get_setting('sidebar_dark', 'adminlte') ?? FALSE,
+  ];
+
+  $form['adminlte']['sidebar_collapsed'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Start with the sidebar collapsed'),
+    '#description' => t('Render the sidebar collapsed to icons by default. Visitors can still expand it with the navbar toggle.'),
+    '#default_value' => theme_get_setting('sidebar_collapsed', 'adminlte') ?? FALSE,
+  ];
+
+  $form['adminlte']['compact_mode'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Compact mode'),
+    '#description' => t('Tighten spacing throughout the shell (denser navbar, sidebar and content) for information-heavy admin screens.'),
+    '#default_value' => theme_get_setting('compact_mode', 'adminlte') ?? FALSE,
+  ];
+
+  $form['adminlte']['force_rtl'] = [
+    '#type' => 'checkbox',
+    '#title' => t('Force right-to-left (RTL) layout'),
+    '#description' => t('Force the RTL stylesheet and <code>dir="rtl"</code> on every page. Leave off for RTL site languages — Drupal already loads the bundled RTL stylesheet automatically for those.'),
+    '#default_value' => theme_get_setting('force_rtl', 'adminlte') ?? FALSE,
+  ];
+
+  $form['adminlte']['primary_color'] = [
+    '#type' => 'color',
+    '#title' => t('Primary (accent) colour'),
+    '#description' => t('Recolours the primary accent — links, focus rings, active states and Bootstrap <code>.btn-primary</code>. Set it back to <code>#0d6efd</code> for the AdminLTE default. Note: Bootstrap components compiled with the default blue (e.g. <code>.alert-primary</code>) are not fully recoloured at runtime; deep customisation is driven by <a href=":url">AdminLTE CSS variables</a>.', [':url' => 'https://adminlte.io/themes/v4/docs/customization.html']),
+    '#default_value' => theme_get_setting('primary_color', 'adminlte') ?: '#0d6efd',
+  ];
+
+  $form['adminlte']['sidebar_width'] = [
+    '#type' => 'number',
+    '#title' => t('Default sidebar width (px)'),
+    '#description' => t('Initial sidebar width in pixels (180–480). Visitors can drag the sidebar edge to resize it; their choice is remembered in the browser. Leave empty for the AdminLTE default (250).'),
+    '#min' => 180,
+    '#max' => 480,
+    '#step' => 1,
+    '#default_value' => theme_get_setting('sidebar_width', 'adminlte') ?: NULL,
   ];
 }

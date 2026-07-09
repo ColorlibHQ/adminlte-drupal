@@ -145,6 +145,125 @@
   };
 
   /**
+   * Drag-to-resize sidebar (desktop only), width persisted in localStorage.
+   *
+   * Mirrors the colour-mode pattern: the width lives in localStorage under
+   * "lte-sidebar-width" and is applied by setting `--lte-sidebar-width` inline on
+   * the sidebar (its min/max-width read that variable). A configurable default
+   * comes from the theme setting via `data-adminlte-sidebar-width`.
+   * @see https://www.drupal.org/project/adminlte/issues/3609296
+   */
+  Drupal.behaviors.adminlteSidebarResize = {
+    attach(context) {
+      const KEY = 'lte-sidebar-width';
+      const MIN = 180;
+      const MAX = 480;
+      const clamp = (w) => Math.max(MIN, Math.min(MAX, Math.round(w)));
+      const isRtl = () =>
+        (document.documentElement.getAttribute('dir') || '').toLowerCase() === 'rtl' ||
+        getComputedStyle(document.documentElement).direction === 'rtl';
+
+      once('adminlte-sidebar-resize', '.app-sidebar', context).forEach((sidebar) => {
+        const apply = (w) => sidebar.style.setProperty('--lte-sidebar-width', `${w}px`);
+        const persist = (w) => {
+          try {
+            localStorage.setItem(KEY, String(w));
+          } catch {
+            // localStorage unavailable (private mode, sandboxed iframe).
+          }
+        };
+
+        // Initial width: stored choice > configured default > CSS default.
+        let width = null;
+        try {
+          const stored = parseInt(localStorage.getItem(KEY), 10);
+          if (stored) {
+            width = stored;
+          }
+        } catch {
+          // Ignore unavailable storage.
+        }
+        if (!width) {
+          const configured = parseInt(
+            sidebar.getAttribute('data-adminlte-sidebar-width'),
+            10,
+          );
+          if (configured) {
+            width = configured;
+          }
+        }
+        if (width) {
+          // Suppress the width transition so the initial size doesn't animate.
+          sidebar.classList.add('is-resizing');
+          apply(clamp(width));
+          requestAnimationFrame(() => sidebar.classList.remove('is-resizing'));
+        }
+
+        const handle = document.createElement('div');
+        handle.className = 'sidebar-resize-handle';
+        handle.setAttribute('role', 'separator');
+        handle.setAttribute('aria-orientation', 'vertical');
+        handle.setAttribute('aria-label', Drupal.t('Resize sidebar'));
+        handle.setAttribute('tabindex', '0');
+        sidebar.appendChild(handle);
+
+        let startX = 0;
+        let startW = 0;
+        let current = 0;
+
+        const onMove = (event) => {
+          const dx = event.clientX - startX;
+          current = clamp(startW + (isRtl() ? -dx : dx));
+          apply(current);
+        };
+        const onUp = (event) => {
+          document.removeEventListener('pointermove', onMove);
+          document.removeEventListener('pointerup', onUp);
+          try {
+            handle.releasePointerCapture(event.pointerId);
+          } catch {
+            // No capture to release.
+          }
+          sidebar.classList.remove('is-resizing');
+          persist(current);
+        };
+
+        handle.addEventListener('pointerdown', (event) => {
+          event.preventDefault();
+          startX = event.clientX;
+          startW = sidebar.getBoundingClientRect().width;
+          current = clamp(startW);
+          sidebar.classList.add('is-resizing');
+          try {
+            handle.setPointerCapture(event.pointerId);
+          } catch {
+            // Capture unsupported; document listeners still track the drag.
+          }
+          document.addEventListener('pointermove', onMove);
+          document.addEventListener('pointerup', onUp);
+        });
+
+        handle.addEventListener('keydown', (event) => {
+          const step = 16;
+          const rtl = isRtl();
+          let w = sidebar.getBoundingClientRect().width;
+          if (event.key === 'ArrowLeft') {
+            w += rtl ? step : -step;
+          } else if (event.key === 'ArrowRight') {
+            w += rtl ? -step : step;
+          } else {
+            return;
+          }
+          event.preventDefault();
+          current = clamp(w);
+          apply(current);
+          persist(current);
+        });
+      });
+    },
+  };
+
+  /**
    * Moves a multi-action dropbutton's secondary actions into a floating menu.
    *
    * Drupal's dropbutton keeps the secondary actions inline in the same list,

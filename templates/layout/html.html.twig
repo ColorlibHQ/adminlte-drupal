@@ -16,6 +16,8 @@
     'layout-fixed',
     'sidebar-expand-lg',
     'bg-body-tertiary',
+    sidebar_collapsed ? 'sidebar-collapse sidebar-mini',
+    compact_mode ? 'compact-mode',
     logged_in ? 'user-logged-in',
     not root_path ? 'path-frontpage' : 'path-' ~ root_path|clean_class,
   ]

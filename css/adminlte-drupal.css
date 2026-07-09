@@ -21,6 +21,33 @@
 }
 
 /* -------------------------------------------------------------------------- *
+ * z-index: sit below Drupal's admin toolbar chrome
+ * AdminLTE ships very high stacking values on its persistent chrome
+ * (.app-header: 1034, .app-sidebar: 1038). Those overlay Drupal's admin
+ * toolbar and, notably, the Admin Toolbar Search autocomplete (z-index 600),
+ * hiding the search results behind the theme header/sidebar. Drupal's core
+ * toolbar lives around z-index 500, so we bring the theme chrome well below it
+ * while preserving AdminLTE's own internal order: sidebar > mobile overlay >
+ * header > content. Transient layers (Bootstrap dropdowns/modals, the account
+ * menu, jQuery-UI dialogs) keep their own high z-index and are unaffected.
+ * See https://www.drupal.org/project/adminlte/issues/3608932
+ * -------------------------------------------------------------------------- */
+.app-header {
+  z-index: 20;
+}
+
+.app-sidebar {
+  z-index: 30;
+}
+
+/* Mobile off-canvas overlay stays just under the sidebar it dims. The theme
+   fixes the body to `sidebar-expand-lg`, so matching that selector (equal
+   specificity, later in the cascade) reliably overrides AdminLTE's 1037. */
+.sidebar-expand-lg.sidebar-open .sidebar-overlay {
+  z-index: 25;
+}
+
+/* -------------------------------------------------------------------------- *
  * Form elements
  * -------------------------------------------------------------------------- */
 input.form-text,
@@ -202,6 +229,49 @@ details > summary {
 /* Sidebar brand link should not look like a Bootstrap link underline. */
 .sidebar-brand .brand-link {
   text-decoration: none;
+}
+
+/* -------------------------------------------------------------------------- *
+ * Resizable sidebar (desktop only). The handle sits on the sidebar's inline-end
+ * edge; the width is applied as `--lte-sidebar-width` and persisted by
+ * adminlte-drupal.js. See https://www.drupal.org/project/adminlte/issues/3609296
+ * -------------------------------------------------------------------------- */
+.sidebar-resize-handle {
+  display: none;
+}
+
+/* Suppress the width transition while dragging (and on the initial apply). */
+.app-sidebar.is-resizing {
+  transition: none;
+}
+
+.app-sidebar.is-resizing,
+.app-sidebar.is-resizing * {
+  user-select: none;
+}
+
+@media (min-width: 992px) {
+  .sidebar-resize-handle {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: -3px;
+    z-index: 5;
+    display: block;
+    width: 6px;
+    cursor: col-resize;
+    touch-action: none;
+  }
+
+  .sidebar-resize-handle:hover,
+  .sidebar-resize-handle:focus-visible {
+    background-color: rgba(var(--bs-primary-rgb), 0.5);
+    outline: none;
+  }
+
+  /* No resize affordance when the sidebar is collapsed to icons. */
+  .sidebar-collapse .sidebar-resize-handle {
+    display: none;
+  }
 }
 
 /* -------------------------------------------------------------------------- *
@@ -657,6 +727,26 @@ input.form-radio {
 .system-modules details summary .text,
 .system-modules .module-description {
   white-space: normal;
+}
+
+/* -------------------------------------------------------------------------- *
+ * Authentication pages (log in / register / reset password)
+ * Body carries `.adminlte-auth-page` (added in adminlte_preprocess_html) so the
+ * otherwise full-width form renders as a centred, constrained card.
+ * -------------------------------------------------------------------------- */
+.adminlte-auth-page .app-content > .container-fluid {
+  max-width: 30rem;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: var(--bs-body-bg);
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: var(--bs-box-shadow-sm);
+}
+
+.adminlte-auth-page .app-content .form-actions .button,
+.adminlte-auth-page .app-content input.form-submit {
+  width: 100%;
 }
 
 /* -------------------------------------------------------------------------- *
