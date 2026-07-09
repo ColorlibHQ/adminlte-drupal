@@ -147,6 +147,16 @@ Remove or rearrange either block at `/admin/structure/block` to suit your build.
 
 Everything is served from the theme — no external CDN calls.
 
+## Icons (Drupal Icon API)
+
+The theme ships a **Bootstrap Icons** pack for Drupal's [Icon API](https://www.drupal.org/docs/develop/drupal-apis/icon-api)
+(`adminlte.icons.yml`, all ~2,000 icons). It's an **optional** integration: install
+the [UI Icons](https://www.drupal.org/project/ui_icons) module and enable its
+`ui_icons_font` submodule (the Icon API is in core from 11.1; `ui_icons` backports
+it to 10.3–11.0), and the pack appears in every icon picker — menu-link icons,
+CKEditor, fields, etc. — using the already-bundled font. Nothing extra to download,
+and the theme works fine without it.
+
 ## Tested
 
 Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):

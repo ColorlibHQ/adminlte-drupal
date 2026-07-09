@@ -24,3 +24,16 @@ adminlte.settings:
       type: integer
       label: 'Default sidebar width (px)'
       nullable: true
+
+# Per-icon settings for the Bootstrap Icons pack (adminlte.icons.yml), validated
+# by the ui_icons module when icons are stored in config.
+ui_icons.icon_pack_options.bootstrap_icons:
+  type: mapping
+  label: 'Bootstrap Icons settings'
+  mapping:
+    size:
+      type: integer
+      label: 'Size (px)'
+    class:
+      type: string
+      label: 'Additional CSS class'

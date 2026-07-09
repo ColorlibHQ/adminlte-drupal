@@ -29,3 +29,12 @@ rtl:
       css/adminlte.rtl.css: {}
   dependencies:
     - adminlte/global-styling
+
+# Loaded on demand by the Bootstrap Icons pack in adminlte.icons.yml when an icon
+# is rendered via the Drupal Icon API. (The webfont CSS is already part of
+# global-styling for normal page rendering.)
+bootstrap_icons:
+  version: 1.13.1
+  css:
+    component:
+      css/vendor/bootstrap-icons.min.css: { minified: true }

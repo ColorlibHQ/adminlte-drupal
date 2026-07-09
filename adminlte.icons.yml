@@ -1,0 +1,38 @@
+# Bootstrap Icons pack for the Drupal Icon API (core 11.1+, or the ui_icons
+# contrib backport on 10.3–11.0). Uses the "font" extractor from the
+# ui_icons_font submodule, so this pack activates only when that module is
+# enabled — it is an optional integration, not a hard dependency.
+# See https://www.drupal.org/project/adminlte/issues/3609048
+bootstrap_icons:
+  enabled: true
+  label: 'Bootstrap Icons'
+  description: 'Bootstrap Icons 1.13, bundled with the AdminLTE theme and rendered as font icons.'
+  links:
+    - https://icons.getbootstrap.com
+  version: 1.13.1
+  license:
+    name: MIT
+    url: 'https://github.com/twbs/icons/blob/main/LICENSE'
+    gpl-compatible: true
+  extractor: font
+  config:
+    sources:
+      - css/vendor/bootstrap-icons.json
+  settings:
+    size:
+      title: 'Size (px)'
+      type: integer
+      default: 16
+    class:
+      title: 'Additional CSS class'
+      type: string
+  # The class must be exact, so do NOT run icon_id through clean_class here.
+  template: >-
+    <i class="bi bi-{{ icon_id }}{% if class %} {{ class }}{% endif %}"
+      {% if size %}style="font-size: {{ size }}px;"{% endif %}
+      aria-hidden="true"></i>
+  # Loads the bundled Bootstrap Icons webfont CSS so the glyphs render.
+  library: 'adminlte/bootstrap_icons'
+  preview: >-
+    <i class="bi bi-{{ icon_id }}" title="{{ label }}"
+      style="font-size: 32px; line-height: 32px;"></i>
