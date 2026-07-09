@@ -1,0 +1,26 @@
+{#
+/**
+ * @file
+ * AdminLTE "info box" stat widget.
+ *
+ * Available props: label, value, icon, color, progress, description, attributes.
+ */
+#}
+{% set attributes = attributes.addClass('info-box') %}
+<div{{ attributes }}>
+  <span class="info-box-icon text-bg-{{ color|default('primary') }}">
+    {% if icon %}<i class="bi bi-{{ icon }}" aria-hidden="true"></i>{% endif %}
+  </span>
+  <div class="info-box-content">
+    <span class="info-box-text">{{ label }}</span>
+    <span class="info-box-number">{{ value }}</span>
+    {% if progress is not null %}
+      <div class="progress">
+        <div class="progress-bar text-bg-{{ color|default('primary') }}" role="progressbar" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      {% if description %}
+        <span class="progress-description">{{ description }}</span>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

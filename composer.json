@@ -5,6 +5,10 @@
     "require": {
         "drupal/bootstrap5": "^4.0"
     },
+    "suggest": {
+        "drupal/ui_patterns": "Surfaces the theme's SDC components (small box, info box, callout) in Layout Builder, Views and field formatters.",
+        "drupal/ui_icons": "Adds the bundled Bootstrap Icons pack to Drupal's Icon API pickers (enable the ui_icons_font submodule)."
+    },
     "keywords": [
         "drupal",
         "theme",

@@ -164,6 +164,31 @@ the theme folder — no Drupal needed) for a self-contained showcase of the
 AdminLTE 4 / Bootstrap 5.3 components this theme provides: buttons, cards,
 tables, forms, tabs, pagination, alerts, badges and icons, in both colour modes.
 
+## Site building: layouts & components
+
+**Bootstrap layouts** — the theme ships five Bootstrap-grid layouts for
+**Layout Builder** (and the *Layout* of display modes), grouped under the
+**AdminLTE** category: one column, two columns (½ + ½), content + sidebar
+(⅔ + ⅓), three columns and four columns. They emit `.row`/`.col-*` markup, so
+Layout Builder regions align to the same grid as the rest of the theme — no
+extra module required.
+
+**Components (SDC / UI Suite)** — three signature AdminLTE widgets ship as
+[Single Directory Components](https://www.drupal.org/docs/develop/theming-drupal/using-single-directory-components):
+`small-box`, `info-box` and `callout`. Use them in any Twig template:
+
+```twig
+{{ include('adminlte:small-box', {
+  value: '150', label: 'New orders', icon: 'bag',
+  color: 'primary', url: '/admin/content'
+}) }}
+```
+
+They work standalone on core SDC. Install
+[UI Patterns 2](https://www.drupal.org/project/ui_patterns) (`drupal/ui_patterns`)
+to surface them — with auto-generated config forms — in **Layout Builder, Views
+and field formatters**, integrating the theme with the **UI Suite** ecosystem.
+
 ## Tested
 
 Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):

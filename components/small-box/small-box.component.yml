@@ -1,0 +1,59 @@
+$schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schemas/v1/metadata.schema.json
+name: Small box
+status: stable
+group: AdminLTE
+description: 'AdminLTE stat box: a large value, label, icon and optional footer link. Discovered by UI Patterns 2 for use in Layout Builder, Views and field formatters.'
+libraryOverrides:
+  dependencies:
+    - adminlte/global-styling
+props:
+  type: object
+  required:
+    - value
+    - label
+  properties:
+    value:
+      type: string
+      title: Value
+      description: 'The large headline figure.'
+      examples:
+        - '150'
+        - '44%'
+    label:
+      type: string
+      title: Label
+      examples:
+        - 'New orders'
+    icon:
+      type: string
+      title: 'Icon'
+      description: 'A Bootstrap Icons name without the "bi-" prefix.'
+      examples:
+        - bag
+        - cart
+        - people
+    color:
+      type: string
+      title: Colour
+      enum:
+        - primary
+        - secondary
+        - success
+        - danger
+        - warning
+        - info
+        - light
+        - dark
+      default: primary
+    url:
+      type: string
+      title: 'Footer link URL'
+      examples:
+        - '/admin/content'
+    link_text:
+      type: string
+      title: 'Footer link text'
+      default: 'More info'
+    attributes:
+      type: Drupal\Core\Template\Attribute
+      title: Attributes

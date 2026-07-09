@@ -19,6 +19,14 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
   ([#3609048](https://www.drupal.org/project/adminlte/issues/3609048)).
 - **Components demo** at `docs/components.html`
   ([#3608677](https://www.drupal.org/project/adminlte/issues/3608677)).
+- **Bootstrap-grid layouts** for Layout Builder (`adminlte.layouts.yml`) — one,
+  two, content+sidebar, three and four column, under the *AdminLTE* category
+  ([#3609456](https://www.drupal.org/project/adminlte/issues/3609456)).
+- **UI Suite integration** — ship `small-box`, `info-box` and `callout` as Single
+  Directory Components; UI Patterns 2 surfaces them in Layout Builder, Views and
+  field formatters. Optional (works standalone on core SDC); `drupal/ui_patterns`
+  added as a Composer *suggest*
+  ([#3608703](https://www.drupal.org/project/adminlte/issues/3608703)).
 - Bundle **Source Sans 3** (the default AdminLTE/Bootstrap body font) locally —
   weights 300/400/700, Latin + Latin-Extended, under the SIL OFL. The intended
   default typography now renders without a CDN or a system-installed font
