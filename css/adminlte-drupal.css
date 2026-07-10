@@ -870,3 +870,18 @@ input.form-radio {
 .ui-dialog .ui-dialog-titlebar-close .ui-icon {
   display: none;
 }
+
+/* -------------------------------------------------------------------------- *
+ * Fix conflicting .placeholder class.
+ * See: https://www.drupal.org/project/drupal/issues/3233533
+ * -------------------------------------------------------------------------- */
+
+[data-drupal-messages] .placeholder,
+[data-drupal-messages-fallback] .placeholder {
+  display: initial;
+  min-height: initial;
+  vertical-align: initial;
+  cursor: initial;
+  background-color: initial;
+  opacity: initial;
+}
