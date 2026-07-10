@@ -622,6 +622,27 @@ abbr.tabledrag-changed {
 }
 
 /* -------------------------------------------------------------------------- *
+ * Views → improve filter layout
+ * -------------------------------------------------------------------------- */
+
+.view-filters {
+  .form--inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: end;
+    gap: 1rem;
+    > .form-actions,
+    > .form-item {
+      margin: 0;
+    }
+    > .form-item {
+      flex: 1 1 auto;
+      min-width: 5rem;
+    }
+  }
+}
+
+/* -------------------------------------------------------------------------- *
  * Pager → Bootstrap pagination
  * -------------------------------------------------------------------------- */
 .pager__items {
