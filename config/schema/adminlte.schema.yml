@@ -24,6 +24,12 @@ adminlte.settings:
       type: integer
       label: 'Default sidebar width (px)'
       nullable: true
+    nav_icon_top_level:
+      type: string
+      label: 'Top-level navigation icon class'
+    nav_icon_sub_level:
+      type: string
+      label: 'Sub-level navigation icon class'
 
 # Per-icon settings for the Bootstrap Icons pack (adminlte.icons.yml), validated
 # by the ui_icons module when icons are stored in config.

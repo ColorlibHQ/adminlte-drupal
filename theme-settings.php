@@ -76,4 +76,24 @@ function adminlte_form_system_theme_settings_alter(array &$form, FormStateInterf
     '#step' => 1,
     '#default_value' => theme_get_setting('sidebar_width') ?: NULL,
   ];
+
+  $form['adminlte']['navigation_icons'] = [
+    '#type' => 'details',
+    '#title' => t('Navigation icons'),
+    '#open' => FALSE,
+  ];
+
+  $form['adminlte']['navigation_icons']['nav_icon_top_level'] = [
+    '#type' => 'textfield',
+    '#title' => t('Top-level sidebar icon class'),
+    '#description' => t('Bootstrap Icons class for top-level sidebar menu items that do not have a specific icon (e.g. <code>bi-record-circle</code>). Leave empty to hide icons at this level.'),
+    '#default_value' => theme_get_setting('nav_icon_top_level') ?? 'bi-record-circle',
+  ];
+
+  $form['adminlte']['navigation_icons']['nav_icon_sub_level'] = [
+    '#type' => 'textfield',
+    '#title' => t('Sub-level sidebar icon class'),
+    '#description' => t('Bootstrap Icons class for nested sidebar menu items (e.g. <code>bi-circle</code>). Leave empty to hide icons at this level.'),
+    '#default_value' => theme_get_setting('nav_icon_sub_level') ?? 'bi-circle',
+  ];
 }

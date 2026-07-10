@@ -11,6 +11,24 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 
 /**
+ * Returns the default Bootstrap Icons classes for sidebar navigation items.
+ *
+ * Empty strings mean no icon is rendered at that level. Per-item icons set in
+ * preprocess (e.g. the Administration menu) still take precedence.
+ *
+ * @return array
+ *   Keyed by: nav_icon_top_level, nav_icon_sub_level.
+ */
+function _adminlte_nav_icon_settings(): array {
+  $top = theme_get_setting('nav_icon_top_level');
+  $sub = theme_get_setting('nav_icon_sub_level');
+  return [
+    'nav_icon_top_level' => trim((string) ($top ?? 'bi-record-circle')),
+    'nav_icon_sub_level' => trim((string) ($sub ?? 'bi-circle')),
+  ];
+}
+
+/**
  * Returns the theme's layout settings with sane defaults.
  *
  * @return array
@@ -149,6 +167,15 @@ function adminlte_preprocess_page(array &$variables): void {
 }
 
 /**
+ * Implements hook_preprocess_HOOK() for menu templates.
+ *
+ * Exposes configurable default icon classes for sidebar treeview menus.
+ */
+function adminlte_preprocess_menu(array &$variables): void {
+  $variables += _adminlte_nav_icon_settings();
+}
+
+/**
  * Implements hook_preprocess_HOOK() for menu-local-task.html.twig.
  *
  * Adds Bootstrap nav classes so admin tabs render as AdminLTE nav-tabs.
@@ -163,6 +190,32 @@ function adminlte_preprocess_menu_local_task(array &$variables): void {
 
   if (!empty($variables['is_active'])) {
     $variables['link']['#options']['attributes']['class'][] = 'active';
+  }
+}
+
+/**
+ * Applies Bootstrap icon classes to menu items that match known routes.
+ *
+ * Walks the full menu tree so icons are set even when sections are nested
+ * (e.g. Content under Administration when the menu has multiple roots).
+ *
+ * @param array $items
+ *   Menu items tree, passed by reference.
+ * @param array $route_icons
+ *   Route name => Bootstrap Icons class.
+ */
+function _adminlte_apply_route_icons(array &$items, array $route_icons): void {
+  foreach ($items as &$item) {
+    $route = '';
+    if (!empty($item['url']) && $item['url'] instanceof Url && $item['url']->isRouted()) {
+      $route = $item['url']->getRouteName();
+    }
+    if (isset($route_icons[$route])) {
+      $item['icon'] = $route_icons[$route];
+    }
+    if (!empty($item['below'])) {
+      _adminlte_apply_route_icons($item['below'], $route_icons);
+    }
   }
 }
 
@@ -194,15 +247,7 @@ function adminlte_preprocess_menu__admin(array &$variables): void {
     'help.main' => 'bi-question-circle',
     'system.admin' => 'bi-speedometer2',
   ];
-  foreach ($variables['items'] as &$item) {
-    $route = '';
-    if (!empty($item['url']) && $item['url'] instanceof Url && $item['url']->isRouted()) {
-      $route = $item['url']->getRouteName();
-    }
-    if (isset($route_icons[$route])) {
-      $item['icon'] = $route_icons[$route];
-    }
-  }
+  _adminlte_apply_route_icons($variables['items'], $route_icons);
 }
 
 /**
