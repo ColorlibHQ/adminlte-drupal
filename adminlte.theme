@@ -291,3 +291,16 @@ function adminlte_preprocess_menu__account(array &$variables): void {
     $item['icon'] = $route_icons[$route] ?? 'bi-dot';
   }
 }
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function adminlte_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (!empty($variables['elements']['#id'])) {
+    $block = Block::load($variables['elements']['#id']);
+    if (!empty($block)) {
+      $suggestions[] = 'block__' . $block->getRegion();
+    }
+  }
+  return $suggestions;
+}

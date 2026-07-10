@@ -48,6 +48,27 @@
 }
 
 /* -------------------------------------------------------------------------- *
+ * Fix Drupal form elements (especially search blocks) inside .app-header
+ * -------------------------------------------------------------------------- */
+
+.app-header {
+  .form-item {
+    margin-block: 0;
+  }
+}
+.compact-mode .app-header {
+  input.form-text,
+  input.form-search,
+  .form-element,
+  .btn {
+    padding-block: 0.1rem;
+  }
+  .container-inline .form-item {
+    margin-right: 0.25rem;
+  }
+}
+
+/* -------------------------------------------------------------------------- *
  * Form elements
  * -------------------------------------------------------------------------- */
 input.form-text,
