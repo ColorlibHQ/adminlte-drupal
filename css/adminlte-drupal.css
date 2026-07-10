@@ -72,7 +72,9 @@ textarea.form-textarea,
   background-clip: padding-box;
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 input.form-text:focus,
@@ -131,7 +133,10 @@ input.button {
   border-radius: var(--bs-border-radius);
   color: var(--bs-body-color);
   background-color: var(--bs-secondary-bg);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
 }
 
 .button:hover {
@@ -416,8 +421,12 @@ ul.dropbutton li {
 }
 
 /* Single-action dropbutton: a normal rounded button. */
-.dropbutton-wrapper:not(.dropbutton-multiple) .dropbutton-action:first-child > a,
-.dropbutton-wrapper:not(.dropbutton-multiple) .dropbutton-action:first-child > .button {
+.dropbutton-wrapper:not(.dropbutton-multiple)
+  .dropbutton-action:first-child
+  > a,
+.dropbutton-wrapper:not(.dropbutton-multiple)
+  .dropbutton-action:first-child
+  > .button {
   border-radius: var(--bs-border-radius);
 }
 

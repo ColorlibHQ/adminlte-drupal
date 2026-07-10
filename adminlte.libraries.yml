@@ -6,12 +6,10 @@ global-styling:
       # Source Sans 3 (the default AdminLTE/Bootstrap body font), bundled locally.
       css/vendor/source-sans-3.css: {}
       css/adminlte.css: { minified: false }
-      css/adminlte-drupal.css: {}
   js:
     # Order matters: Bootstrap (with Popper) must load before AdminLTE.
     js/vendor/bootstrap.bundle.min.js: { minified: true }
     js/adminlte.js: {}
-    js/adminlte-drupal.js: {}
   dependencies:
     - core/drupal
     - core/drupalSettings
@@ -27,6 +25,16 @@ rtl:
   css:
     theme:
       css/adminlte.rtl.css: {}
+  dependencies:
+    - adminlte/global-styling
+
+# Drupal specific
+drupal:
+  css:
+    theme:
+      css/adminlte-drupal.css: {}
+  js:
+    js/adminlte-drupal.js: {}
   dependencies:
     - adminlte/global-styling
 

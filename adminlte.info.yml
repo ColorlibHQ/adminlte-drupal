@@ -1,6 +1,6 @@
-name: 'AdminLTE 4'
+name: "AdminLTE 4"
 type: theme
-description: 'Official AdminLTE 4 admin theme for Drupal — Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. By Colorlib.'
+description: "Official AdminLTE 4 admin theme for Drupal — Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. By Colorlib."
 package: AdminLTE
 core_version_requirement: ^10.3 || ^11
 # Bootstrap5 is a maintained base theme that supplies Drupal "glue" CSS for core
@@ -14,6 +14,7 @@ logo: logo.svg
 # Load the global AdminLTE styling/behaviour on every page.
 libraries:
   - adminlte/global-styling
+  - adminlte/drupal
 
 # Keep Bootstrap5's core-markup glue (bootstrap5/base + bootstrap5/messages, both
 # in the CSS "component" group) but drop its own compiled Bootstrap CSS and JS —
@@ -30,15 +31,15 @@ ckeditor5-stylesheets:
   - css/adminlte.css
 
 regions:
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
-  navbar_left: 'Navbar (left)'
-  navbar_right: 'Navbar (right)'
-  sidebar_brand: 'Sidebar brand'
-  sidebar: 'Sidebar'
-  page_title: 'Content header: title'
-  breadcrumb: 'Content header: breadcrumb'
-  highlighted: 'Highlighted'
-  help: 'Help'
-  content: 'Content'
-  footer: 'Footer'
+  page_top: "Page top"
+  page_bottom: "Page bottom"
+  navbar_left: "Navbar (left)"
+  navbar_right: "Navbar (right)"
+  sidebar_brand: "Sidebar brand"
+  sidebar: "Sidebar"
+  page_title: "Content header: title"
+  breadcrumb: "Content header: breadcrumb"
+  highlighted: "Highlighted"
+  help: "Help"
+  content: "Content"
+  footer: "Footer"
