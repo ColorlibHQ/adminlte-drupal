@@ -2,7 +2,7 @@ $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schema
 name: Info box
 status: stable
 group: AdminLTE
-description: 'AdminLTE info box: a coloured icon beside a label and figure, with an optional progress bar. Discovered by UI Patterns 2 for Layout Builder, Views and field formatters.'
+description: 'AdminLTE info box: a colored icon beside a label and figure, with an optional progress bar. Discovered by UI Patterns 2 for Layout Builder, Views and field formatters.'
 libraryOverrides:
   dependencies:
     - adminlte/global-styling
@@ -31,7 +31,7 @@ props:
         - gear
     color:
       type: string
-      title: Colour
+      title: Color
       enum:
         - primary
         - secondary

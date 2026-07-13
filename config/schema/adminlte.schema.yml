@@ -4,7 +4,7 @@ adminlte.settings:
   mapping:
     default_color_mode:
       type: string
-      label: 'Default colour mode'
+      label: 'Default color mode'
     sidebar_dark:
       type: boolean
       label: 'Dark sidebar'
@@ -19,7 +19,7 @@ adminlte.settings:
       label: 'Force right-to-left (RTL) layout'
     primary_color:
       type: string
-      label: 'Primary (accent) colour'
+      label: 'Primary (accent) color'
     sidebar_width:
       type: integer
       label: 'Default sidebar width (px)'

@@ -11,7 +11,7 @@ base theme: bootstrap5
 screenshot: screenshot.png
 logo: logo.svg
 
-# Load the global AdminLTE styling/behaviour on every page.
+# Load the global AdminLTE styling/behavior on every page.
 libraries:
   - adminlte/global-styling
   - adminlte/drupal

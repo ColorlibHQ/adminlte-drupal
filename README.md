@@ -5,7 +5,7 @@
 [![Bootstrap 5.3](https://img.shields.io/badge/Bootstrap-5.3-7952b3.svg?logo=bootstrap&logoColor=white)](https://getbootstrap.com/docs/5.3/)
 
 Official **AdminLTE 4** admin theme for **Drupal** — Bootstrap 5.3, vanilla JS
-(no jQuery), light & dark colour modes. Self-contained: all assets are bundled
+(no jQuery), light & dark color modes. Self-contained: all assets are bundled
 locally, no CDN required. By [Colorlib](https://colorlib.com).
 
 > ✅ **Officially created and maintained by [Colorlib](https://colorlib.com)** —
@@ -13,7 +13,7 @@ locally, no CDN required. By [Colorlib](https://colorlib.com).
 > is the first-party Drupal port, not a third-party reskin.
 
 Verified on **Drupal 11.3** (PHP 8.5): clean install, no errors/warnings in the
-log, all admin screens render with the AdminLTE shell in both colour modes.
+log, all admin screens render with the AdminLTE shell in both color modes.
 
 <p align="center">
   <img alt="AdminLTE 4 for Drupal — admin, light theme" src="docs/screenshots/dashboard-light.png" width="49%">
@@ -100,9 +100,9 @@ sidebar menu, navbar, breadcrumbs, tabs, messages and content render immediately
 
 At `/admin/appearance/settings/adminlte`:
 
-- **Default colour mode** — `auto` (follow OS), `light` or `dark`. Visitors can
+- **Default color mode** — `auto` (follow OS), `light` or `dark`. Visitors can
   override it with the navbar toggle; their choice is remembered in the browser.
-- **Dark sidebar** — render the sidebar dark regardless of the page colour mode
+- **Dark sidebar** — render the sidebar dark regardless of the page color mode
   (applied via `data-bs-theme="dark"` on the sidebar). *Off by default* — the
   sidebar follows the active light/dark mode unless you enable this.
 - **Start with the sidebar collapsed** — render the sidebar collapsed to icons on
@@ -115,7 +115,7 @@ At `/admin/appearance/settings/adminlte`:
   `.rtl.css` naming convention). Use the setting only to force RTL on an
   LTR-language site.
 
-For customisation beyond these settings (colours, spacing, etc.), AdminLTE 4 is
+For customisation beyond these settings (colors, spacing, etc.), AdminLTE 4 is
 driven by [CSS variables](https://adminlte.io/themes/v4/docs/customization.html).
 To edit CSS without touching theme files or writing a subtheme, the
 [CSS Editor](https://www.drupal.org/project/css_editor) module lets you add
@@ -140,7 +140,7 @@ Remove or rearrange either block at `/admin/structure/block` to suit your build.
 | Asset | Notes |
 |-------|-------|
 | `css/adminlte.css` | AdminLTE 4 styles — **Bootstrap 5.3 CSS included** |
-| `js/adminlte.js` | AdminLTE behaviours (sidebar, treeview) |
+| `js/adminlte.js` | AdminLTE behaviors (sidebar, treeview) |
 | `js/vendor/bootstrap.bundle.min.js` | Bootstrap 5.3 + Popper |
 | `css/vendor/bootstrap-icons.min.css` + fonts | Bootstrap Icons 1.13 |
 | `css/vendor/source-sans-3.css` + fonts | Source Sans 3 (default body font, weights 300/400/700, [OFL](css/vendor/fonts/OFL.txt)) |
@@ -162,7 +162,7 @@ and the theme works fine without it.
 Open [`docs/components.html`](docs/components.html) in a browser (straight from
 the theme folder — no Drupal needed) for a self-contained showcase of the
 AdminLTE 4 / Bootstrap 5.3 components this theme provides: buttons, cards,
-tables, forms, tabs, pagination, alerts, badges and icons, in both colour modes.
+tables, forms, tabs, pagination, alerts, badges and icons, in both color modes.
 
 ## Site building: layouts & components
 
@@ -200,7 +200,7 @@ Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):
   per-section icons; the active section is highlighted and auto-expanded.
 - Page title, breadcrumb, admin tabs, local actions, status messages, the
   navbar user dropdown and the site-branding sidebar brand all render correctly.
-- Light and dark colour modes, the navbar mode toggle, and coexistence with the
+- Light and dark color modes, the navbar mode toggle, and coexistence with the
   Drupal admin **toolbar** (using `--drupal-displace-offset-top`) all work.
 
 ## Known limitations

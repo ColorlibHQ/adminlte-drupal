@@ -468,7 +468,7 @@ ul.dropbutton li {
 
 /* Secondary actions live in a floating menu (relocated by adminlte-drupal.js)
    so they overlay content like a Bootstrap dropdown instead of pushing or
-   colliding with neighbouring table rows. */
+   colliding with neighboring table rows. */
 ul.dropbutton-menu {
   position: absolute;
   z-index: 1000;
@@ -822,7 +822,7 @@ input.form-radio {
   }
 }
 
-/* Core modal dialogs (jQuery UI) need a solid surface in both colour modes. */
+/* Core modal dialogs (jQuery UI) need a solid surface in both color modes. */
 .ui-dialog {
   background-color: var(--bs-body-bg);
   border: var(--bs-border-width) solid var(--bs-border-color);

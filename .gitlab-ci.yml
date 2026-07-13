@@ -1,12 +1,5 @@
 ################
 # GitLabCI template for Drupal projects.
-#
-# This uses the official GitLabCI template maintained by the Drupal Association,
-# which runs the standard contrib test/lint jobs (phpcs, phpstan, eslint,
-# stylelint, cspell, phpunit) against this theme.
-#
-# For information on customising jobs, variables and adding/skipping jobs, see:
-# https://project.pages.drupalcode.org/gitlab_templates/
 ################
 
 include:
@@ -18,11 +11,13 @@ include:
       - '/includes/include.drupalci.workflows.yml'
 
 variables:
-  # Skip Nightwatch/functional-JS jobs by default: this theme ships no custom
-  # test suite yet, and the lint/static-analysis jobs are the ones tracked in
-  # https://www.drupal.org/project/adminlte/issues/3607152
-  SKIP_ESLINT: '0'
-  SKIP_STYLELINT: '0'
-  SKIP_PHPSTAN: '0'
-  SKIP_PHPCS: '0'
-  SKIP_CSPELL: '0'
+  SKIP_STYLELINT: '1'
+
+phpcs:
+  allow_failure: false
+
+phpstan:
+  allow_failure: false
+
+cspell:
+  allow_failure: false
