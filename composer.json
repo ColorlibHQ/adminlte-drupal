@@ -6,8 +6,10 @@
         "drupal/bootstrap5": "^4.0"
     },
     "suggest": {
+        "drupal/css_editor": "Add custom CSS from the admin UI without touching theme files.",
         "drupal/ui_patterns": "Surfaces the theme's SDC components (small box, info box, callout) in Layout Builder, Views and field formatters.",
-        "drupal/ui_icons": "Adds the bundled Bootstrap Icons pack to Drupal's Icon API pickers (enable the ui_icons_font submodule)."
+        "drupal/ui_icons": "Adds the bundled Bootstrap Icons pack to Drupal's Icon API pickers (enable the ui_icons_font submodule).",
+        "drupal/gin_login": "Beautiful alternative to the default AdminLTE login screen."
     },
     "keywords": [
         "drupal",
