@@ -1,5 +1,5 @@
 global-styling:
-  version: 4.0.2
+  version: 4.8.1
   css:
     # Bootstrap 5.3 is bundled inside adminlte.css, so no separate Bootstrap CSS.
     theme:
@@ -23,7 +23,7 @@ global-styling:
 # attached when the "Force RTL" theme setting is on, to flip the layout on
 # LTR-language sites too. Depends on global-styling so it cascades after it.
 rtl:
-  version: 4.0.2
+  version: 4.8.1
   css:
     theme:
       css/adminlte.rtl.css: {}
@@ -41,7 +41,7 @@ bootstrap_icons:
 
 # Spacing/helpers for the theme-provided Bootstrap layouts (adminlte.layouts.yml).
 layouts:
-  version: 4.0.2
+  version: 4.8.1
   css:
     layout:
       css/layouts.css: {}

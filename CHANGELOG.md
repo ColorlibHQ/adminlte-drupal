@@ -6,6 +6,15 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+### Changed
+
+- **Bundled AdminLTE updated to 4.8.1** (from 4.0.2). The refreshed
+  `css/adminlte.css`, `css/adminlte.rtl.css` and `js/adminlte.js` bring, among
+  other things: the sidebar height fix when a sidebar filter is present, a
+  restyled header search, `d-print-none` working on the sidebar and app wrapper,
+  `data-lte-print="plain"` for pages that print as documents, and the pagination
+  focus-ring fix. Library versions in `adminlte.libraries.yml` follow.
+
 ### Added
 
 - **Primary/accent colour picker** in theme settings — recolours links, focus
