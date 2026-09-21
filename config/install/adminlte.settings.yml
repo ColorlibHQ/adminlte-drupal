@@ -5,5 +5,6 @@ compact_mode: false
 force_rtl: false
 primary_color: '#000000'
 sidebar_width: null
+sidebar_persistence: true
 nav_icon_top_level: bi-record-circle
 nav_icon_sub_level: bi-circle

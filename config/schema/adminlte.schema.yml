@@ -24,6 +24,9 @@ adminlte.settings:
       type: integer
       label: 'Default sidebar width (px)'
       nullable: true
+    sidebar_persistence:
+      type: boolean
+      label: 'Enable sidebar persistence'
     nav_icon_top_level:
       type: string
       label: 'Top-level navigation icon class'

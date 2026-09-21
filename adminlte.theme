@@ -49,6 +49,7 @@ function _adminlte_layout_settings(): array {
     'force_rtl' => (bool) ($themeSettingsProvider->getSetting('force_rtl') ?? FALSE),
     'primary_color' => $themeSettingsProvider->getSetting('primary_color') ?: NULL,
     'sidebar_width' => $themeSettingsProvider->getSetting('sidebar_width') ?: NULL,
+    'sidebar_persistence' => (bool) ($themeSettingsProvider->getSetting('sidebar_persistence') ?? FALSE),
   ];
 }
 
@@ -168,6 +169,7 @@ function adminlte_preprocess_page(array &$variables): void {
   $settings = _adminlte_layout_settings();
   $variables['sidebar_dark'] = $settings['sidebar_dark'];
   $variables['sidebar_width'] = $settings['sidebar_width'];
+  $variables['sidebar_persistence'] = $settings['sidebar_persistence'];
 }
 
 /**
