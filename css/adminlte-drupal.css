@@ -643,9 +643,10 @@ abbr.tabledrag-changed {
 }
 
 /* -------------------------------------------------------------------------- *
- * Views → improve filter layout
+ * Views
  * -------------------------------------------------------------------------- */
 
+/* Improve filter layout */
 .view-filters {
   .form--inline {
     display: flex;
@@ -661,6 +662,11 @@ abbr.tabledrag-changed {
       min-width: 5rem;
     }
   }
+}
+
+/* Display views grouping caption above table */
+table caption.views-bootstrap-table-caption-grouping {
+  caption-side: top;
 }
 
 /* -------------------------------------------------------------------------- *
