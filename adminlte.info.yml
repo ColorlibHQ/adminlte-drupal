@@ -27,8 +27,9 @@ libraries-override:
 
 # Style CKEditor 5 content to match the theme rather than inheriting Bootstrap5's
 # css/ck5style.css.
-ckeditor5-stylesheets:
-  - css/adminlte.css
+### DISABLED UNTIL https://git.drupalcode.org/project/adminlte/-/work_items/3613363 is fixed: ###
+# ckeditor5-stylesheets:
+#  - css/adminlte.css
 
 regions:
   page_top: "Page top"
