@@ -1,7 +1,7 @@
 # Bootstrap Icons pack for the Drupal Icon API (core 11.1+, or the ui_icons
 # contrib backport on 10.3–11.0). Uses the "font" extractor from the
-# ui_icons_font submodule, so this pack activates only when that module is
-# enabled — it is an optional integration, not a hard dependency.
+# ui_icons_font submodule, which is therefore a theme dependency (see
+# adminlte.info.yml): core throws for packs with an unknown extractor.
 # See https://www.drupal.org/project/adminlte/issues/3609048
 bootstrap_icons:
   enabled: true

@@ -52,6 +52,11 @@ The same AdminLTE 4 dashboard, in the framework you know best — you're looking
   "glue" CSS. Composer pulls it in automatically; for a manual install, download
   and place it in `themes/contrib/bootstrap5` as well. AdminLTE still bundles its
   own Bootstrap 5.3 build, so Bootstrap5's own CSS/JS is disabled.
+- The [**UI Icons**](https://www.drupal.org/project/ui_icons) module
+  (`drupal/ui_icons`) with its **`ui_icons_font`** submodule enabled. It provides
+  the "font" icon extractor used by the theme's Bootstrap Icons pack. Composer
+  pulls it in automatically, but Drupal does not enable a theme's module
+  dependencies for you — enable `ui_icons_font` **before** installing the theme.
 
 ## Installation
 
@@ -62,6 +67,7 @@ Composer's default `minimum-stability: stable` would otherwise skip pre-releases
 
 ```bash
 composer require 'drupal/adminlte:^1.0@beta'
+drush pm:enable ui_icons_font                  # required module, see Requirements
 drush theme:enable adminlte
 drush config:set system.theme admin adminlte   # use as the administration theme
 ```
@@ -70,7 +76,9 @@ Once **1.0.0** stable is released, the plain `composer require drupal/adminlte` 
 
 ### Manual
 
-1. Download the theme and extract it into `themes/contrib/adminlte`.
+1. Download the theme and extract it into `themes/contrib/adminlte`, then
+   download [UI Icons](https://www.drupal.org/project/ui_icons) and enable its
+   **UI Icons Web fonts** (`ui_icons_font`) submodule at `/admin/modules`.
 2. Visit **Appearance** (`/admin/appearance`).
 3. Under *Uninstalled themes*, click **Install** (or **Install and set as default**)
    next to **AdminLTE 4**.
@@ -150,12 +158,12 @@ Everything is served from the theme — no external CDN calls.
 ## Icons (Drupal Icon API)
 
 The theme ships a **Bootstrap Icons** pack for Drupal's [Icon API](https://www.drupal.org/docs/develop/drupal-apis/icon-api)
-(`adminlte.icons.yml`, all ~2,000 icons). It's an **optional** integration: install
-the [UI Icons](https://www.drupal.org/project/ui_icons) module and enable its
-`ui_icons_font` submodule (the Icon API is in core from 11.1; `ui_icons` backports
-it to 10.3–11.0), and the pack appears in every icon picker — menu-link icons,
-CKEditor, fields, etc. — using the already-bundled font. Nothing extra to download,
-and the theme works fine without it.
+(`adminlte.icons.yml`, all ~2,000 icons). It relies on the "font" extractor from
+the [UI Icons](https://www.drupal.org/project/ui_icons) `ui_icons_font` submodule
+(the Icon API is in core from 11.1; `ui_icons` backports it to 10.3–11.0), which
+is why that module is a required dependency. The pack appears in every icon
+picker — menu-link icons, CKEditor, fields, etc. — using the already-bundled
+font. Nothing extra to download.
 
 ## Component reference
 
