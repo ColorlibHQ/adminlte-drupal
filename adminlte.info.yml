@@ -30,6 +30,14 @@ libraries:
 libraries-override:
   bootstrap5/global-styling: false
   bootstrap5/bootstrap5-js-latest: false
+  bootstrap5/dropbutton:
+    css:
+      component:
+        css/components/dropbutton.css: false
+  core/drupal.dropbutton:
+    css:
+      component:
+        misc/dropbutton/dropbutton.css: false
 
 # Style CKEditor 5 content to match the theme rather than inheriting Bootstrap5's
 # css/ck5style.css.
