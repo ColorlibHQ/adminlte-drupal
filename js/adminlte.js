@@ -1063,10 +1063,11 @@
 
     onDOMContentLoaded(() => {
         const accessibilityManager = initAccessibility({
+            // @todo: Make these values configurable in the theme settings:
             announcements: true,
             skipLinks: true,
             focusManagement: true,
-            keyboardNavigation: true,
+            keyboardNavigation: false, // Warning this conflicts with items in the header, e.g. search input!
             reducedMotion: true
         });
         accessibilityManager.addLandmarks();
