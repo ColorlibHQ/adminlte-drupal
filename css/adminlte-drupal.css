@@ -67,6 +67,52 @@
     margin-right: 0.25rem;
   }
 }
+/* -------------------------------------------------------------------------- *
+ * Headings - clear hierarchy without utility classes
+ * -------------------------------------------------------------------------- */
+ h1, .h1 {
+  font-size: 1.75rem;
+}
+@media (min-width: 1200px) {
+  h1, .h1 {
+    font-size: 1.75rem;
+  }
+}
+
+h2, .h2 {
+  font-size: 1.5rem;
+}
+@media (min-width: 1200px) {
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+}
+
+h3, .h3 {
+  font-size: 1.35rem;
+}
+@media (min-width: 1200px) {
+  h3, .h3 {
+    font-size: 1.35rem;
+  }
+}
+
+h4, .h4 {
+  font-size: 1.25rem;
+}
+@media (min-width: 1200px) {
+  h4, .h4 {
+    font-size: 1.25rem;
+  }
+}
+
+h5, .h5 {
+  font-size: 1.15rem;
+}
+
+h6, .h6 {
+  font-size: 1rem;
+}
 
 /* -------------------------------------------------------------------------- *
  * Form elements
