@@ -957,3 +957,17 @@ input.form-radio {
   background-color: initial;
   opacity: initial;
 }
+
+/* -------------------------------------------------------------------------- *
+ * Keep wide Drupal tables (content, people, blocks, logs, views) from
+ * widening the whole page on narrow viewports: the content area scrolls
+ * horizontally instead of the document.
+ * -------------------------------------------------------------------------- */
+
+.app-main {
+  min-width: 0;
+}
+
+.app-content {
+  overflow-x: auto;
+}
