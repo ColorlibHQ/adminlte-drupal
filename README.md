@@ -13,7 +13,7 @@ required. It also works as an admin theme. By [Colorlib](https://colorlib.com).
 > the authors of [AdminLTE](https://github.com/ColorlibHQ/AdminLTE) itself. This
 > is the first-party Drupal port, not a third-party reskin.
 
-Verified on **Drupal 11.3** (PHP 8.5): clean install, no errors/warnings in the
+Verified on **Drupal 11.4** (PHP 8.5): clean install, no errors/warnings in the
 log, all admin screens render with the AdminLTE shell in both color modes.
 
 <p align="center">
@@ -130,6 +130,11 @@ To edit CSS without touching theme files or writing a subtheme, the
 [CSS Editor](https://www.drupal.org/project/css_editor) module lets you add
 custom CSS straight from the admin UI.
 
+> **Drupal 11.4+ Navigation module:** core's new *Navigation* module (enabled by the
+> standard profile) renders its own icon rail next to the theme's sidebar. If you
+> want AdminLTE's sidebar to be the only navigation, uninstall `navigation`
+> (`drush pmu navigation`) and use the *Toolbar* module or the theme sidebar.
+
 ## Navigation blocks: frontend vs. admin theme
 
 AdminLTE works both as a **frontend** theme (for applications, intranets and
@@ -200,7 +205,7 @@ and field formatters**, integrating the theme with the **UI Suite** ecosystem.
 
 ## Tested
 
-Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):
+Verified against a clean **Drupal 11.4.12** install (standard profile, PHP 8.5):
 
 - All core admin screens (dashboard, content, structure, modules, people, reports,
   appearance, node add/edit) render with the AdminLTE shell and return HTTP 200.
