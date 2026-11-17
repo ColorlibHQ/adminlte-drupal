@@ -9,7 +9,7 @@ bootstrap_icons:
   description: 'Bootstrap Icons 1.13, bundled with the AdminLTE theme and rendered as font icons.'
   links:
     - https://icons.getbootstrap.com
-  version: 1.13.1
+  version: 1.13.2
   license:
     name: MIT
     url: 'https://github.com/twbs/icons/blob/main/LICENSE'
