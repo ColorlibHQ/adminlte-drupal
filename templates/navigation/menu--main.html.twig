@@ -10,14 +10,17 @@
  * - items: A nested list of menu items, each with: attributes, title, url,
  *   is_expanded, is_collapsed, in_active_trail, below (child items).
  * - menu_name: The machine name of the menu.
+ * - nav_icon_top_level: Bootstrap Icons class for top-level items (empty = none).
+ * - nav_icon_sub_level: Bootstrap Icons class for nested items (empty = none).
  *
  * @see template_preprocess_menu()
+ * @see adminlte_preprocess_menu()
  */
 #}
 {% import _self as menus %}
-{{ menus.menu_links(items, attributes, 0) }}
+{{ menus.menu_links(items, attributes, 0, nav_icon_top_level, nav_icon_sub_level) }}
 
-{% macro menu_links(items, attributes, menu_level) %}
+{% macro menu_links(items, attributes, menu_level, nav_icon_top_level, nav_icon_sub_level) %}
   {% import _self as menus %}
   {% if items %}
     {% if menu_level == 0 %}
@@ -42,7 +45,10 @@
       %}
       <li{{ item.attributes.addClass(li_classes) }}>
         <a href="{{ item.url }}" class="{{ link_classes|join(' ')|trim }}">
-          <i class="nav-icon bi {{ menu_level == 0 ? 'bi-record-circle' : 'bi-circle' }}" aria-hidden="true"></i>
+          {% set icon_class = item.icon|default(menu_level == 0 ? nav_icon_top_level : nav_icon_sub_level) %}
+          {% if icon_class %}
+            <i class="nav-icon bi {{ icon_class }}" aria-hidden="true"></i>
+          {% endif %}
           <p>{{ item.title }}</p>
         </a>
         {% if item.below %}
@@ -50,7 +56,7 @@
           <button type="button" class="nav-treeview-toggle" aria-expanded="{{ item.in_active_trail ? 'true' : 'false' }}" aria-label="{{ 'Toggle submenu'|t }}">
             <i class="nav-arrow bi bi-chevron-right" aria-hidden="true"></i>
           </button>
-          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1, nav_icon_top_level, nav_icon_sub_level) }}
         {% endif %}
       </li>
     {% endfor %}

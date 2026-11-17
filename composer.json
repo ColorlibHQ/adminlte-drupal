@@ -3,11 +3,13 @@
     "description": "Official AdminLTE 4 application theme for Drupal — dashboards, intranets and SaaS UIs. Bootstrap 5.3, vanilla JS, light & dark modes; also works as an admin theme.",
     "type": "drupal-theme",
     "require": {
-        "drupal/bootstrap5": "^4.0"
+        "drupal/bootstrap5": "^4.0 || ^5@beta",
+        "drupal/ui_icons": "^1.0 || ^2.0"
     },
     "suggest": {
+        "drupal/css_editor": "Add custom CSS from the admin UI without touching theme files.",
         "drupal/ui_patterns": "Surfaces the theme's SDC components (small box, info box, callout) in Layout Builder, Views and field formatters.",
-        "drupal/ui_icons": "Adds the bundled Bootstrap Icons pack to Drupal's Icon API pickers (enable the ui_icons_font submodule)."
+        "drupal/gin_login": "Beautiful alternative to the default AdminLTE login screen."
     },
     "keywords": [
         "drupal",

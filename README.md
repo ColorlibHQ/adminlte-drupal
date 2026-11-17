@@ -6,7 +6,7 @@
 
 Official **AdminLTE 4** application theme for **Drupal** — build dashboards,
 intranets and SaaS app UIs with Bootstrap 5.3, vanilla JS (no jQuery) and light &
-dark colour modes. Self-contained: all assets are bundled locally, no CDN
+dark color modes. Self-contained: all assets are bundled locally, no CDN
 required. It also works as an admin theme. By [Colorlib](https://colorlib.com).
 
 > ✅ **Officially created and maintained by [Colorlib](https://colorlib.com)** —
@@ -14,7 +14,7 @@ required. It also works as an admin theme. By [Colorlib](https://colorlib.com).
 > is the first-party Drupal port, not a third-party reskin.
 
 Verified on **Drupal 11.3** (PHP 8.5): clean install, no errors/warnings in the
-log, all admin screens render with the AdminLTE shell in both colour modes.
+log, all admin screens render with the AdminLTE shell in both color modes.
 
 <p align="center">
   <img alt="AdminLTE 4 for Drupal — application UI, light theme" src="docs/screenshots/dashboard-light.png" width="49%">
@@ -53,6 +53,11 @@ The same AdminLTE 4 dashboard, in the framework you know best — you're looking
   "glue" CSS. Composer pulls it in automatically; for a manual install, download
   and place it in `themes/contrib/bootstrap5` as well. AdminLTE still bundles its
   own Bootstrap 5.3 build, so Bootstrap5's own CSS/JS is disabled.
+- The [**UI Icons**](https://www.drupal.org/project/ui_icons) module
+  (`drupal/ui_icons`) with its **`ui_icons_font`** submodule enabled. It provides
+  the "font" icon extractor used by the theme's Bootstrap Icons pack. Composer
+  pulls it in automatically, but Drupal does not enable a theme's module
+  dependencies for you — enable `ui_icons_font` **before** installing the theme.
 
 ## Installation
 
@@ -63,6 +68,7 @@ Composer's default `minimum-stability: stable` would otherwise skip pre-releases
 
 ```bash
 composer require 'drupal/adminlte:^1.0@beta'
+drush pm:enable ui_icons_font                  # required module, see Requirements
 drush theme:enable adminlte
 drush config:set system.theme admin adminlte   # use as the administration theme
 ```
@@ -71,7 +77,9 @@ Once **1.0.0** stable is released, the plain `composer require drupal/adminlte` 
 
 ### Manual
 
-1. Download the theme and extract it into `themes/contrib/adminlte`.
+1. Download the theme and extract it into `themes/contrib/adminlte`, then
+   download [UI Icons](https://www.drupal.org/project/ui_icons) and enable its
+   **UI Icons Web fonts** (`ui_icons_font`) submodule at `/admin/modules`.
 2. Visit **Appearance** (`/admin/appearance`).
 3. Under *Uninstalled themes*, click **Install** (or **Install and set as default**)
    next to **AdminLTE 4**.
@@ -101,9 +109,9 @@ sidebar menu, navbar, breadcrumbs, tabs, messages and content render immediately
 
 At `/admin/appearance/settings/adminlte`:
 
-- **Default colour mode** — `auto` (follow OS), `light` or `dark`. Visitors can
+- **Default color mode** — `auto` (follow OS), `light` or `dark`. Visitors can
   override it with the navbar toggle; their choice is remembered in the browser.
-- **Dark sidebar** — render the sidebar dark regardless of the page colour mode
+- **Dark sidebar** — render the sidebar dark regardless of the page color mode
   (applied via `data-bs-theme="dark"` on the sidebar). *Off by default* — the
   sidebar follows the active light/dark mode unless you enable this.
 - **Start with the sidebar collapsed** — render the sidebar collapsed to icons on
@@ -116,7 +124,7 @@ At `/admin/appearance/settings/adminlte`:
   `.rtl.css` naming convention). Use the setting only to force RTL on an
   LTR-language site.
 
-For customisation beyond these settings (colours, spacing, etc.), AdminLTE 4 is
+For customisation beyond these settings (colors, spacing, etc.), AdminLTE 4 is
 driven by [CSS variables](https://adminlte.io/themes/v4/docs/customization.html).
 To edit CSS without touching theme files or writing a subtheme, the
 [CSS Editor](https://www.drupal.org/project/css_editor) module lets you add
@@ -141,7 +149,7 @@ Remove or rearrange either block at `/admin/structure/block` to suit your build.
 | Asset | Notes |
 |-------|-------|
 | `css/adminlte.css` | AdminLTE 4 styles — **Bootstrap 5.3 CSS included** |
-| `js/adminlte.js` | AdminLTE behaviours (sidebar, treeview) |
+| `js/adminlte.js` | AdminLTE behaviors (sidebar, treeview) |
 | `js/vendor/bootstrap.bundle.min.js` | Bootstrap 5.3 + Popper |
 | `css/vendor/bootstrap-icons.min.css` + fonts | Bootstrap Icons 1.13 |
 | `css/vendor/source-sans-3.css` + fonts | Source Sans 3 (default body font, weights 300/400/700, [OFL](css/vendor/fonts/OFL.txt)) |
@@ -151,19 +159,19 @@ Everything is served from the theme — no external CDN calls.
 ## Icons (Drupal Icon API)
 
 The theme ships a **Bootstrap Icons** pack for Drupal's [Icon API](https://www.drupal.org/docs/develop/drupal-apis/icon-api)
-(`adminlte.icons.yml`, all ~2,000 icons). It's an **optional** integration: install
-the [UI Icons](https://www.drupal.org/project/ui_icons) module and enable its
-`ui_icons_font` submodule (the Icon API is in core from 11.1; `ui_icons` backports
-it to 10.3–11.0), and the pack appears in every icon picker — menu-link icons,
-CKEditor, fields, etc. — using the already-bundled font. Nothing extra to download,
-and the theme works fine without it.
+(`adminlte.icons.yml`, all ~2,000 icons). It relies on the "font" extractor from
+the [UI Icons](https://www.drupal.org/project/ui_icons) `ui_icons_font` submodule
+(the Icon API is in core from 11.1; `ui_icons` backports it to 10.3–11.0), which
+is why that module is a required dependency. The pack appears in every icon
+picker — menu-link icons, CKEditor, fields, etc. — using the already-bundled
+font. Nothing extra to download.
 
 ## Component reference
 
 Open [`docs/components.html`](docs/components.html) in a browser (straight from
 the theme folder — no Drupal needed) for a self-contained showcase of the
 AdminLTE 4 / Bootstrap 5.3 components this theme provides: buttons, cards,
-tables, forms, tabs, pagination, alerts, badges and icons, in both colour modes.
+tables, forms, tabs, pagination, alerts, badges and icons, in both color modes.
 
 ## Site building: layouts & components
 
@@ -201,7 +209,7 @@ Verified against a clean **Drupal 11.3.13** install (standard profile, PHP 8.5):
   per-section icons; the active section is highlighted and auto-expanded.
 - Page title, breadcrumb, admin tabs, local actions, status messages, the
   navbar user dropdown and the site-branding sidebar brand all render correctly.
-- Light and dark colour modes, the navbar mode toggle, and coexistence with the
+- Light and dark color modes, the navbar mode toggle, and coexistence with the
   Drupal admin **toolbar** (using `--drupal-displace-offset-top`) all work.
 
 ## Known limitations
