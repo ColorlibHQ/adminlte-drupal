@@ -48,6 +48,73 @@
 }
 
 /* -------------------------------------------------------------------------- *
+ * Fix Drupal form elements (especially search blocks) inside .app-header
+ * -------------------------------------------------------------------------- */
+
+.app-header {
+  .form-item {
+    margin-block: 0;
+  }
+}
+.compact-mode .app-header {
+  input.form-text,
+  input.form-search,
+  .form-element,
+  .btn {
+    padding-block: 0.1rem;
+  }
+  .container-inline .form-item {
+    margin-right: 0.25rem;
+  }
+}
+/* -------------------------------------------------------------------------- *
+ * Headings - clear hierarchy without utility classes
+ * -------------------------------------------------------------------------- */
+ h1, .h1 {
+  font-size: 1.75rem;
+}
+@media (min-width: 1200px) {
+  h1, .h1 {
+    font-size: 1.75rem;
+  }
+}
+
+h2, .h2 {
+  font-size: 1.5rem;
+}
+@media (min-width: 1200px) {
+  h2, .h2 {
+    font-size: 1.5rem;
+  }
+}
+
+h3, .h3 {
+  font-size: 1.35rem;
+}
+@media (min-width: 1200px) {
+  h3, .h3 {
+    font-size: 1.35rem;
+  }
+}
+
+h4, .h4 {
+  font-size: 1.25rem;
+}
+@media (min-width: 1200px) {
+  h4, .h4 {
+    font-size: 1.25rem;
+  }
+}
+
+h5, .h5 {
+  font-size: 1.15rem;
+}
+
+h6, .h6 {
+  font-size: 1rem;
+}
+
+/* -------------------------------------------------------------------------- *
  * Form elements
  * -------------------------------------------------------------------------- */
 input.form-text,
@@ -72,7 +139,9 @@ textarea.form-textarea,
   background-clip: padding-box;
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 input.form-text:focus,
@@ -131,7 +200,10 @@ input.button {
   border-radius: var(--bs-border-radius);
   color: var(--bs-body-color);
   background-color: var(--bs-secondary-bg);
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out;
 }
 
 .button:hover {
@@ -351,7 +423,6 @@ details > summary {
 
 ul.dropbutton {
   display: inline-flex;
-  flex-wrap: wrap;
   align-items: stretch;
   max-width: 100%;
   margin: 0;
@@ -416,8 +487,12 @@ ul.dropbutton li {
 }
 
 /* Single-action dropbutton: a normal rounded button. */
-.dropbutton-wrapper:not(.dropbutton-multiple) .dropbutton-action:first-child > a,
-.dropbutton-wrapper:not(.dropbutton-multiple) .dropbutton-action:first-child > .button {
+.dropbutton-wrapper:not(.dropbutton-multiple)
+  .dropbutton-action:first-child
+  > a,
+.dropbutton-wrapper:not(.dropbutton-multiple)
+  .dropbutton-action:first-child
+  > .button {
   border-radius: var(--bs-border-radius);
 }
 
@@ -438,7 +513,7 @@ ul.dropbutton li {
 
 /* Secondary actions live in a floating menu (relocated by adminlte-drupal.js)
    so they overlay content like a Bootstrap dropdown instead of pushing or
-   colliding with neighbouring table rows. */
+   colliding with neighboring table rows. */
 ul.dropbutton-menu {
   position: absolute;
   z-index: 1000;
@@ -613,6 +688,33 @@ abbr.tabledrag-changed {
 }
 
 /* -------------------------------------------------------------------------- *
+ * Views
+ * -------------------------------------------------------------------------- */
+
+/* Improve filter layout */
+.view-filters {
+  .form--inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: end;
+    gap: 1rem;
+    > .form-actions,
+    > .form-item {
+      margin: 0;
+    }
+    > .form-item {
+      flex: 1 1 auto;
+      min-width: 5rem;
+    }
+  }
+}
+
+/* Display views grouping caption above table */
+table caption.views-bootstrap-table-caption-grouping {
+  caption-side: top;
+}
+
+/* -------------------------------------------------------------------------- *
  * Pager → Bootstrap pagination
  * -------------------------------------------------------------------------- */
 .pager__items {
@@ -771,7 +873,7 @@ input.form-radio {
   }
 }
 
-/* Core modal dialogs (jQuery UI) need a solid surface in both colour modes. */
+/* Core modal dialogs (jQuery UI) need a solid surface in both color modes. */
 .ui-dialog {
   background-color: var(--bs-body-bg);
   border: var(--bs-border-width) solid var(--bs-border-color);
@@ -839,4 +941,33 @@ input.form-radio {
 
 .ui-dialog .ui-dialog-titlebar-close .ui-icon {
   display: none;
+}
+
+/* -------------------------------------------------------------------------- *
+ * Fix conflicting .placeholder class.
+ * See: https://www.drupal.org/project/drupal/issues/3233533
+ * -------------------------------------------------------------------------- */
+
+[data-drupal-messages] .placeholder,
+[data-drupal-messages-fallback] .placeholder {
+  display: initial;
+  min-height: initial;
+  vertical-align: initial;
+  cursor: initial;
+  background-color: initial;
+  opacity: initial;
+}
+
+/* -------------------------------------------------------------------------- *
+ * Keep wide Drupal tables (content, people, blocks, logs, views) from
+ * widening the whole page on narrow viewports: the content area scrolls
+ * horizontally instead of the document.
+ * -------------------------------------------------------------------------- */
+
+.app-main {
+  min-width: 0;
+}
+
+.app-content {
+  overflow-x: auto;
 }

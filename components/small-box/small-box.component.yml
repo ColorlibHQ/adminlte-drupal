@@ -34,7 +34,7 @@ props:
         - people
     color:
       type: string
-      title: Colour
+      title: Color
       enum:
         - primary
         - secondary

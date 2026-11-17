@@ -6,14 +6,28 @@ this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## [Unreleased]
 
+## [1.0.0-beta12] - 2026-11-17
+
+The drupal.org-only releases 1.0.0-beta2 to 1.0.0-beta11 are merged into this
+branch as well (see the
+[drupal.org release notes](https://www.drupal.org/project/adminlte/releases)).
+
 ### Changed
 
-- **Bundled AdminLTE updated to 4.8.1** (from 4.0.2). The refreshed
-  `css/adminlte.css`, `css/adminlte.rtl.css` and `js/adminlte.js` bring, among
-  other things: the sidebar height fix when a sidebar filter is present, a
-  restyled header search, `d-print-none` working on the sidebar and app wrapper,
-  `data-lte-print="plain"` for pages that print as documents, and the pagination
-  focus-ring fix. Library versions in `adminlte.libraries.yml` follow.
+- **Bundled AdminLTE updated to 4.10.2** (from 4.8.1), **Bootstrap to 5.3.9**
+  (bundled in `adminlte.css` and `js/vendor/bootstrap.bundle.min.js`) and
+  **Bootstrap Icons to 1.13.2**. 4.9 and 4.10 add print defaults (the app shell
+  no longer prints), `data-lte-print="plain"`, `data-lte-contrast="aa"`,
+  `data-lte-primary`, opt-in colour sheets and a fullscreen-icon sync fix.
+  Library versions in `adminlte.libraries.yml` follow.
+- Verified on Drupal 11.4.12 (PHP 8.5.11) with `drupal/bootstrap5` 4.0.9 and
+  `drupal/ui_icons` 2.1.0.
+
+### Fixed
+
+- Wide tables (content, people, block layout, Views UI, log messages) no longer
+  widen the whole page at phone widths; the content area scrolls horizontally
+  instead.
 
 ### Added
 

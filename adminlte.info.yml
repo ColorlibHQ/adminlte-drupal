@@ -1,6 +1,6 @@
-name: 'AdminLTE 4'
+name: "AdminLTE 4"
 type: theme
-description: 'Official AdminLTE 4 application theme for Drupal — build dashboards, intranets and SaaS app UIs with Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. Also works as an admin theme. By Colorlib.'
+description: "Official AdminLTE 4 application theme for Drupal — build dashboards, intranets and SaaS app UIs with Bootstrap 5.3, vanilla JS (no jQuery), light & dark modes. Also works as an admin theme. By Colorlib."
 package: AdminLTE
 core_version_requirement: ^10.3 || ^11
 # Bootstrap5 is a maintained base theme that supplies Drupal "glue" CSS for core
@@ -8,12 +8,19 @@ core_version_requirement: ^10.3 || ^11
 # (now deprecated) does not. We inherit that glue but keep AdminLTE's own bundled
 # Bootstrap build. See #3609244 (replaces Stable9) and #3608934 (base CSS).
 base theme: bootstrap5
+# The Bootstrap Icons pack (adminlte.icons.yml) uses the "font" icon extractor,
+# which only the ui_icons_font submodule provides. Core throws a
+# PluginNotFoundException for packs with an unknown extractor, so the module
+# is required, not optional.
+dependencies:
+  - ui_icons:ui_icons_font
 screenshot: screenshot.png
 logo: logo.svg
 
-# Load the global AdminLTE styling/behaviour on every page.
+# Load the global AdminLTE styling/behavior on every page.
 libraries:
   - adminlte/global-styling
+  - adminlte/drupal
 
 # Keep Bootstrap5's core-markup glue (bootstrap5/base + bootstrap5/messages, both
 # in the CSS "component" group) but drop its own compiled Bootstrap CSS and JS —
@@ -23,22 +30,31 @@ libraries:
 libraries-override:
   bootstrap5/global-styling: false
   bootstrap5/bootstrap5-js-latest: false
+  bootstrap5/dropbutton:
+    css:
+      component:
+        css/components/dropbutton.css: false
+  core/drupal.dropbutton:
+    css:
+      component:
+        misc/dropbutton/dropbutton.css: false
 
 # Style CKEditor 5 content to match the theme rather than inheriting Bootstrap5's
 # css/ck5style.css.
-ckeditor5-stylesheets:
-  - css/adminlte.css
+### DISABLED UNTIL https://git.drupalcode.org/project/adminlte/-/work_items/3613363 is fixed: ###
+# ckeditor5-stylesheets:
+#  - css/adminlte.css
 
 regions:
-  page_top: 'Page top'
-  page_bottom: 'Page bottom'
-  navbar_left: 'Navbar (left)'
-  navbar_right: 'Navbar (right)'
-  sidebar_brand: 'Sidebar brand'
-  sidebar: 'Sidebar'
-  page_title: 'Content header: title'
-  breadcrumb: 'Content header: breadcrumb'
-  highlighted: 'Highlighted'
-  help: 'Help'
-  content: 'Content'
-  footer: 'Footer'
+  page_top: "Page top"
+  page_bottom: "Page bottom"
+  navbar_left: "Navbar (left)"
+  navbar_right: "Navbar (right)"
+  sidebar_brand: "Sidebar brand"
+  sidebar: "Sidebar"
+  page_title: "Content header: title"
+  breadcrumb: "Content header: breadcrumb"
+  highlighted: "Highlighted"
+  help: "Help"
+  content: "Content"
+  footer: "Footer"

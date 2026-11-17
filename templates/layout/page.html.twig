@@ -11,7 +11,8 @@
  * @see html.html.twig
  */
 #}
-<div class="app-wrapper">
+<div
+  class="app-wrapper">
 
   {# begin::Header (navbar) #}
   <nav class="app-header navbar navbar-expand bg-body">
@@ -27,8 +28,9 @@
         {% endif %}
       </ul>
 
-      <ul class="navbar-nav ms-auto">
-        {# Light/dark mode toggle. Behaviour lives in adminlte-drupal.js. #}
+      <ul
+        class="navbar-nav ms-auto">
+        {# Light/dark mode toggle. Behavior lives in adminlte-drupal.js. #}
         <li class="nav-item">
           <button type="button" class="nav-link btn btn-link border-0" data-adminlte-theme-toggle aria-label="{{ 'Toggle dark mode'|t }}">
             <i class="bi bi-moon-stars" aria-hidden="true"></i>
@@ -44,7 +46,7 @@
   {# end::Header #}
 
   {# begin::Sidebar #}
-  <aside class="app-sidebar shadow{{ sidebar_dark ? ' bg-body-secondary' : ' bg-body' }}"{% if sidebar_dark %} data-bs-theme="dark"{% endif %}{% if sidebar_width %} data-adminlte-sidebar-width="{{ sidebar_width }}"{% endif %}>
+  <aside class="app-sidebar shadow{{ sidebar_dark ? ' bg-body-secondary' : ' bg-body' }}" {% if sidebar_dark %} data-bs-theme="dark" {% endif %} {% if sidebar_width %} data-adminlte-sidebar-width="{{ sidebar_width }}" {% endif %} {% if sidebar_persistence %} data-enable-persistence="true" {% endif %}>
     <div class="sidebar-brand">
       {% if page.sidebar_brand %}
         {{ page.sidebar_brand }}

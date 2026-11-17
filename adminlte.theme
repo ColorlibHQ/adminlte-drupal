@@ -7,8 +7,28 @@
 
 declare(strict_types=1);
 
+use Drupal\block\Entity\Block;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
+
+/**
+ * Returns the default Bootstrap Icons classes for sidebar navigation items.
+ *
+ * Empty strings mean no icon is rendered at that level. Per-item icons set in
+ * preprocess (e.g. the Administration menu) still take precedence.
+ *
+ * @return array
+ *   Keyed by: nav_icon_top_level, nav_icon_sub_level.
+ */
+function _adminlte_nav_icon_settings(): array {
+  $themeSettingsProvider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
+  $top = $themeSettingsProvider->getSetting('nav_icon_top_level');
+  $sub = $themeSettingsProvider->getSetting('nav_icon_sub_level');
+  return [
+    'nav_icon_top_level' => trim((string) ($top ?? 'bi-record-circle')),
+    'nav_icon_sub_level' => trim((string) ($sub ?? 'bi-circle')),
+  ];
+}
 
 /**
  * Returns the theme's layout settings with sane defaults.
@@ -18,31 +38,34 @@ use Drupal\Core\Url;
  *   compact_mode, force_rtl.
  */
 function _adminlte_layout_settings(): array {
+  $themeSettingsProvider = \Drupal::service('Drupal\Core\Extension\ThemeSettingsProvider');
   return [
-    'default_color_mode' => theme_get_setting('default_color_mode', 'adminlte') ?? 'auto',
-    // The sidebar follows the active colour mode by default; a dark override is
+    'default_color_mode' => $themeSettingsProvider->getSetting('default_color_mode') ?? 'auto',
+    // The sidebar follows the active color mode by default; a dark override is
     // opt-in (see https://www.drupal.org/project/adminlte/issues/3608682).
-    'sidebar_dark' => (bool) (theme_get_setting('sidebar_dark', 'adminlte') ?? FALSE),
-    'sidebar_collapsed' => (bool) (theme_get_setting('sidebar_collapsed', 'adminlte') ?? FALSE),
-    'compact_mode' => (bool) (theme_get_setting('compact_mode', 'adminlte') ?? FALSE),
-    'force_rtl' => (bool) (theme_get_setting('force_rtl', 'adminlte') ?? FALSE),
-    'primary_color' => theme_get_setting('primary_color', 'adminlte') ?: NULL,
-    'sidebar_width' => theme_get_setting('sidebar_width', 'adminlte') ?: NULL,
+    'sidebar_dark' => (bool) ($themeSettingsProvider->getSetting('sidebar_dark') ?? FALSE),
+    'sidebar_collapsed' => (bool) ($themeSettingsProvider->getSetting('sidebar_collapsed') ?? FALSE),
+    'compact_mode' => (bool) ($themeSettingsProvider->getSetting('compact_mode') ?? FALSE),
+    'force_rtl' => (bool) ($themeSettingsProvider->getSetting('force_rtl') ?? FALSE),
+    'primary_color' => $themeSettingsProvider->getSetting('primary_color') ?: NULL,
+    'sidebar_width' => $themeSettingsProvider->getSetting('sidebar_width') ?: NULL,
+    'sidebar_persistence' => (bool) ($themeSettingsProvider->getSetting('sidebar_persistence') ?? FALSE),
   ];
 }
 
 /**
- * Builds a CSS override block that recolours the primary accent.
+ * Builds a CSS override block that recolors the primary accent.
  *
  * Overrides the Bootstrap primary CSS variables (utilities, links, focus rings)
- * plus the `.btn-primary` component variables, since Bootstrap bakes the literal
- * default colour into compiled components rather than reading `--bs-primary`.
+ * plus the `.btn-primary` component variables, since Bootstrap bakes the
+ * literal default color into compiled components rather than reading
+ * `--bs-primary`.
  *
  * @param string $hex
- *   A colour as `#rrggbb` (already normalised by the core 'color' element).
+ *   A color as `#rrggbb` (already normalised by the core 'color' element).
  *
  * @return string|null
- *   The CSS, or NULL when the colour is missing or malformed.
+ *   The CSS, or NULL when the color is missing or malformed.
  */
 function _adminlte_primary_color_css(string $hex): ?string {
   if (!preg_match('/^#[0-9a-fA-F]{6}$/', $hex)) {
@@ -122,9 +145,9 @@ function adminlte_preprocess_html(array &$variables): void {
     $variables['attributes']['class'][] = 'adminlte-auth-page';
   }
 
-  // Custom primary/accent colour: inject a small <style> block in <head>.
+  // Custom primary/accent color: inject a small <style> block in <head>.
   // Theme settings are global config, so no cache context is needed; the config
-  // cache tag rebuilds cached pages when the colour changes. See
+  // cache tag rebuilds cached pages when the color changes. See
   // https://www.drupal.org/project/adminlte/issues/3608660
   if ($settings['primary_color']
     && ($css = _adminlte_primary_color_css($settings['primary_color'])) !== NULL) {
@@ -146,6 +169,16 @@ function adminlte_preprocess_page(array &$variables): void {
   $settings = _adminlte_layout_settings();
   $variables['sidebar_dark'] = $settings['sidebar_dark'];
   $variables['sidebar_width'] = $settings['sidebar_width'];
+  $variables['sidebar_persistence'] = $settings['sidebar_persistence'];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for menu templates.
+ *
+ * Exposes configurable default icon classes for sidebar treeview menus.
+ */
+function adminlte_preprocess_menu(array &$variables): void {
+  $variables += _adminlte_nav_icon_settings();
 }
 
 /**
@@ -167,9 +200,35 @@ function adminlte_preprocess_menu_local_task(array &$variables): void {
 }
 
 /**
+ * Applies Bootstrap icon classes to menu items that match known routes.
+ *
+ * Walks the full menu tree so icons are set even when sections are nested
+ * (e.g. Content under Administration when the menu has multiple roots).
+ *
+ * @param array $items
+ *   Menu items tree, passed by reference.
+ * @param array $route_icons
+ *   Route name => Bootstrap Icons class.
+ */
+function _adminlte_apply_route_icons(array &$items, array $route_icons): void {
+  foreach ($items as &$item) {
+    $route = '';
+    if (!empty($item['url']) && $item['url'] instanceof Url && $item['url']->isRouted()) {
+      $route = $item['url']->getRouteName();
+    }
+    if (isset($route_icons[$route])) {
+      $item['icon'] = $route_icons[$route];
+    }
+    if (!empty($item['below'])) {
+      _adminlte_apply_route_icons($item['below'], $route_icons);
+    }
+  }
+}
+
+/**
  * Implements hook_preprocess_HOOK() for menu--admin.html.twig.
  *
- * Gives the top-level Administration sections recognisable Bootstrap icons.
+ * Gives the top-level Administration sections recognizable Bootstrap icons.
  */
 function adminlte_preprocess_menu__admin(array &$variables): void {
   // The Administration menu's root is a single "Administration" item; promote
@@ -194,15 +253,7 @@ function adminlte_preprocess_menu__admin(array &$variables): void {
     'help.main' => 'bi-question-circle',
     'system.admin' => 'bi-speedometer2',
   ];
-  foreach ($variables['items'] as &$item) {
-    $route = '';
-    if (!empty($item['url']) && $item['url'] instanceof Url && $item['url']->isRouted()) {
-      $route = $item['url']->getRouteName();
-    }
-    if (isset($route_icons[$route])) {
-      $item['icon'] = $route_icons[$route];
-    }
-  }
+  _adminlte_apply_route_icons($variables['items'], $route_icons);
 }
 
 /**
@@ -245,4 +296,17 @@ function adminlte_preprocess_menu__account(array &$variables): void {
     }
     $item['icon'] = $route_icons[$route] ?? 'bi-dot';
   }
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function adminlte_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if (!empty($variables['elements']['#id'])) {
+    $block = Block::load($variables['elements']['#id']);
+    if (!empty($block)) {
+      $suggestions[] = 'block__' . $block->getRegion();
+    }
+  }
+  return $suggestions;
 }

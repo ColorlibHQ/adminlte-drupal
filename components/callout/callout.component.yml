@@ -2,7 +2,7 @@ $schema: https://git.drupalcode.org/project/drupal/-/raw/HEAD/core/assets/schema
 name: Callout
 status: stable
 group: AdminLTE
-description: 'AdminLTE callout: a coloured, left-bordered highlight box with a title and rich body slot. Discovered by UI Patterns 2 for Layout Builder, Views and field formatters.'
+description: 'AdminLTE callout: a colored, left-bordered highlight box with a title and rich body slot. Discovered by UI Patterns 2 for Layout Builder, Views and field formatters.'
 libraryOverrides:
   dependencies:
     - adminlte/global-styling

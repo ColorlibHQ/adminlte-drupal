@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Ensure all blocks inside the navbar left region are wrapped inside an
+ * li.
+ *
+ * @see template_preprocess_block()
+ */
+#}
+{%
+  set classes = [
+    'block',
+    'block--app-header',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+  ]
+%}
+<li{{ attributes.addClass(classes) }}>
+  {{ title_prefix }}
+  {% if label %}
+    <strong{{ title_attributes }}>{{ label }}</strong>
+  {% endif %}
+  {{ title_suffix }}
+  {% block content %}
+    {{ content }}
+  {% endblock %}
+</li>
